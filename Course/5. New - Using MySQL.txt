@@ -1,0 +1,22 @@
+
+- To connect to mysql cmd window
+$ D:\xampp\mysql\bin\mysql -uroot -p
+
+- to make an enviroment variable in window, in start menu search `enviroment vairables`
+then hit `enviroment vairables` button then in user section press on PATH enviroment and then add
+`D:\xampp\mysql\bin\mysql` in it, dont forget to restart the pc
+then all you have to do now is to type
+$ mysql -uroot -p
+
+- Show all database avairable
+$ show databases;
+
+- Create new database
+$ create database my_db;
+
+- to switch using a specific database
+$ use my_db;
+
+- Show all tables in a database
+$ show tables;
+    

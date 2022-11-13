@@ -1,0 +1,11 @@
+- To create a Laravel project
+$ composer create-project laravel/laravel myapp
+
+- Globally installing the Laravel installer via Composer
+$ composer global require laravel/installer
+ 
+- Create a laravel project
+$ laravel new myapp
+
+- Open Laravel Server in git bash in the project's folder (InsideLaravel Folder)   
+$ php artisan serve
