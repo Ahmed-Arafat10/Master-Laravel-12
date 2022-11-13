@@ -1,0 +1,5 @@
+- Dont ever forget, you will create routes in folder `routes` > `web.php`
+
+
+
+    
