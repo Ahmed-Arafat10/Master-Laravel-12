@@ -81,4 +81,13 @@ class PostController extends Controller
     {
         //
     }
+    public function ContactPage()
+    {
+        return view('contact');
+    }
+    public function hello_page($name,$age)
+    {
+       // return view('hello')->with('name',$name,'age',$age);
+        return view('hello',compact('name','age'));
+    }
 }

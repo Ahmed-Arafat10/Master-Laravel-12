@@ -46,3 +46,7 @@ use \App\Http\Controllers\PostController;
 Route::get('/testcont1/{id}',[PostController::class,'index']);
 
 Route::resource('posts',PostController::class);
+
+Route::get('/contact',[PostController::class,'ContactPage']);
+
+Route::get('/helloarafat/{name}/{age}',[PostController::class,'hello_page']);
