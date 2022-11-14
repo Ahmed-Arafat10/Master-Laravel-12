@@ -16,3 +16,31 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/hello',function (){
+    return "Hello Laravel";
+});
+
+
+Route::get('/admin/test',function (){
+    return "Hello Admin";
+});
+
+
+Route::get('/human/{age}/{name}',function ($age,$name)
+{
+    return "My name is " . $name . " My age is " . $age;
+});
+
+Route::get('/admin/fold/user',array('as'=>'admin.fold',function(){
+    echo route('admin.fold');
+    return view('welcome');
+}));
+
+
+Route::get('/testcont','\App\Http\Controllers\PostController@index');
+
+use \App\Http\Controllers\PostController;
+
+
+Route::get('/testcont1/{id}',[PostController::class,'index']);
