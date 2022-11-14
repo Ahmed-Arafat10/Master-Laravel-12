@@ -44,3 +44,5 @@ use \App\Http\Controllers\PostController;
 
 
 Route::get('/testcont1/{id}',[PostController::class,'index']);
+
+Route::resource('posts',PostController::class);
