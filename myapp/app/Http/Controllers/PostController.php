@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index($id)
     {
-        return "It's Working Guys" . " ID is: ". $id;
+        return "It's Working Guys" . " ID is: " . $id;
     }
 
     /**
@@ -29,7 +29,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -40,7 +40,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -51,7 +51,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -62,8 +62,8 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -74,20 +74,30 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
+
     public function ContactPage()
     {
         return view('contact');
     }
-    public function hello_page($name,$age)
+
+    public function hello_page($name, $age)
     {
-       // return view('hello')->with('name',$name,'age',$age);
-        return view('hello',compact('name','age'));
+        // return view('hello')->with('name',$name,'age',$age);
+        return view('hello', compact('name', 'age'));
+    }
+
+
+    public function Contact33()
+    {
+        
+        $people = ["ahmed", 'mohamed', 'yousry', 'arafat'];
+        return view('testblade.contact33', compact('people'));
     }
 }
