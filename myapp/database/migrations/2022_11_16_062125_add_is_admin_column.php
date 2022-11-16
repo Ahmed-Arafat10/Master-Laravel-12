@@ -1,11 +1,8 @@
 <?php
-# in this video we will learn how to add a new column to a table without dropping the whole table
-# this is not feasible as this table may contain records which will be deleted
-# to do this type:
-# $ php artisan make:migration add_is_admin_column --table="posts"
-# note: you can type --table=posts without quotes
 
-# in `add_is_admin_column.php` file the following code will be created
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     /**
@@ -35,10 +32,3 @@ return new class extends Migration {
     }
 };
 
-/*
-    - then type following command
-    $ php artisan migrate
-    - as we said before previous command execute all latest migration files
-    - again to undo last migration command type
-    $ php artisan migrate:rollback
- */
