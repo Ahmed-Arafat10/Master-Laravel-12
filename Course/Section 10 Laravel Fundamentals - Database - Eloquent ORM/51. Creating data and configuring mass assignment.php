@@ -1,0 +1,20 @@
+<?php
+
+# now we will see how to insert using ORM (Eloquent)
+
+
+Route::get('/elo_insert', function () {
+    // without adding fillable array in class `Post` it will give you an error (Add [title] to fillable property to allow mass assignment on [App\Models\Post].)
+    Post::create(['title' => 'OOP', 'content' => 'hello OOP']);
+});
+
+
+# then is `Post` class add
+
+// by default this array is empty, so you have to add columns you want to fill their values
+/*
+protected $fillable = [
+    'title',
+    'content'
+];
+*/
