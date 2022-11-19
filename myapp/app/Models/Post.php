@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    // use HasFactory;
+    use SoftDeletes;
 
+    protected $dates = ['deleted_at'];// to treat this column as a timestamp
+
+    // use HasFactory;
     // to change default table name
     protected $table = 'posts'; // by default is name of class in lowercase + `s` at end
     // then PostAdmin class will have a table by default called --> postadmins

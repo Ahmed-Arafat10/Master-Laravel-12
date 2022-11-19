@@ -1,0 +1,57 @@
+<?php
+
+/*
+
+- `Soft Deleting` a record means there is a column that indicates the TIME at which this column is deleted, if this
+column in NULL then this column is not deleted yet, so it is actually not a real deleting unless we deleted the
+soft deleted records. It is something like trash in different operating systems
+- to do such thing we must include following line in `Post.php` model class
+*/
+
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+# then add following code in post class
+
+# use SoftDeletes;
+
+# protected $dates = ['deleted_at'];// to treat this column as a timestamp
+
+// now you have to create a migration file to add the new column in posts table
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('posts', function (Blueprint $table) {
+            $table->softDeletes();// will create a column called `deleted_at` with datatype timestamp
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    // note that this function is executed when you execute migrate:rollback command
+    public function down()
+    {
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
+        });
+    }
+};
+
+# now all we have to do is to create a route that normally delete the row
+
+// soft delete of a row (as we know it will not actually delete it will just add delete time in `deleted_at` column)
+Route::get('/elo_softdelete', function () {
+    return Post::find(11)->delete();
+});
+
+# note: if you read records of posts table using [select *] then all soft deleted records will not be shown in the
+# query result BY DEFAULT
+
+

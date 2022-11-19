@@ -1,0 +1,24 @@
+<?php
+
+// Method #1 to delete
+Route::get('/elo_delete1', function () {
+    $res = Post::find(1);
+    //$res->delete(); // note if the ID does not exist it will show an errors as $res is NULL
+    // to solve this
+    if ($res) $res->delete();
+    else echo "ID not found";
+});
+
+
+// Method #2 to delete
+Route::get('/elo_delete2', function () {
+    return Post::destroy(1); // will return 0 as ID 1 does not exist
+    // or delete multiple records
+    Post::destroy([3, 4]);
+});
+
+
+// Method #3 to delete
+Route::get('/elo_delete3', function () {
+    return Post::where('id', 2)->delete();
+});

@@ -114,7 +114,7 @@ Route::get('/elo_read', function () {
     foreach ($posts as $single) {
         //echo $single->title . "<br/>";
         echo '<pre>';
-        print_r($single);
+        print_r($single->id);
     }
 });
 
@@ -166,11 +166,77 @@ Route::get('/elo_basicupdate', function () {
 });
 
 
-Route::get('/elo_insert', function () {
+Route::get('/elo_insert/{title}/{content}', function ($title, $content) {
     // without adding fillable array in class `Post` it will give you an error (Add [title] to fillable property to allow mass assignment on [App\Models\Post].)
-    Post::create(['title' => 'OOP', 'content' => 'hello OOP']);
+    Post::create(['title' => $title, 'content' => $content]);
 });
 
 Route::get('/elo_update', function () {
     Post::where('id', 4)->update(['title' => 'ORM updated DS']);
+});
+
+
+// Method #1 to delete
+Route::get('/elo_delete1', function () {
+    $res = Post::find(1);
+    //$res->delete(); // note if the ID does not exist it will show an errors as $res is NULL
+    // to solve this
+    if ($res) $res->delete();
+    else echo "ID not found";
+});
+
+
+// Method #2 to delete
+Route::get('/elo_delete2', function () {
+    return Post::destroy(1); // will return 0 as ID 1 does not exist
+    // or delete multiple records
+    Post::destroy([3, 4]);
+});
+
+
+// Method #3 to delete
+Route::get('/elo_delete3', function () {
+    return Post::where('id', 2)->delete();
+});
+
+
+// soft delete of a row (as we know it will not actually delete it will just add delete time in `deleted_at` column)
+Route::get('/elo_softdelete', function () {
+    return Post::find(10)->delete();
+});
+
+
+Route::get('/elo_readsoftdelete1', function () {
+    // withTrashed() function will show both soft deleted & normal records
+    $res = Post::withTrashed()->where('is_admin', 0)->get();
+    return $res;
+});
+
+
+Route::get('/elo_readsoftdelete2', function () {
+    // onlyTrashed() function will show ONLY soft deleted records
+    $res = Post::onlyTrashed()->where('is_admin', 0)->get();
+    return $res;
+});
+
+
+Route::get('/elo_restoresoftdelete', function () {
+    // function restore() will convert soft deleted records shown in the following select query into normal records
+    // you can also use withTrashed() function, depends on the case
+    $res = Post::onlyTrashed()->where('is_admin', 0)->restore();
+    return $res;
+});
+
+
+Route::get('/elo_getonlysoftdelete', function () {
+    // function restore() will convert soft deleted records shown in the following select query into normal records
+    // you can also use withTrashed() function, depends on the case
+    $res = Post::onlyTrashed()->get();
+    return $res;
+});
+
+Route::get('/elo_force_delete_soft_delete', function () {
+    // forceDelete() will directly delete the row(s), not just change the date in `deleted_at` column as in soft delete
+    $res = Post::onlyTrashed()->where('id', 10)->forceDelete();
+    return $res;
 });
