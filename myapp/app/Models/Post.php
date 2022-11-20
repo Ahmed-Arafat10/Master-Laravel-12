@@ -26,4 +26,8 @@ class Post extends Model
         'content'
     ];
 
+    public function GetUserDataFromPost()
+    {
+        return $this->belongsTo('App\Models\User', 'User_ID', 'id');
+    }
 }

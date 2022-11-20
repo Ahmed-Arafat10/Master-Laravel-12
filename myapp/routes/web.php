@@ -53,7 +53,7 @@ Route::get('/helloarafat/{name}/{age}', [PostController::class, 'hello_page']);
 Route::get('/contact33', [PostController::class, 'Contact33']);
 
 /*
-|--------------------------------------------------------------------------
+ |--------------------------------------------------------------------------
 | Raw SQL Queries
 |--------------------------------------------------------------------------
 */
@@ -103,6 +103,8 @@ Route::get('/delete', function () {
 
 // to import class Post
 use App\Models\Post;
+use App\Models\User;
+
 
 Route::get('/elo_read', function () {
 
@@ -239,4 +241,35 @@ Route::get('/elo_force_delete_soft_delete', function () {
     // forceDelete() will directly delete the row(s), not just change the date in `deleted_at` column as in soft delete
     $res = Post::onlyTrashed()->where('id', 10)->forceDelete();
     return $res;
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| ELOQUENT Relationships
+ |--------------------------------------------------------------------------
+*/
+
+// One-to-One relationship
+Route::get('/user/{id}/posts', function ($id) {
+    // post1() is the function we wrote in User Model Class
+    return User::find($id)->post1;
+    //return User::find($id)->post1->content;
+});
+
+
+// get data of user from `User_ID` column in a post
+Route::get('/posts/{id}/user', function ($id) {
+    // post1() is the function we wrote in User Model Class
+    return Post::find($id)->GetUserDataFromPost;
+    //return User::find($id)->post1->content;
+});
+
+
+// one-to-many relationship
+Route::get('/all_posts_for_user/{id}', function ($id) {
+    $user = User::find($id);
+    foreach ($user->allposts as $single) {
+        echo $single->title . "<br>";
+    }
 });
