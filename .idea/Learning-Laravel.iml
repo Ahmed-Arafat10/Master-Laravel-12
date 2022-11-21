@@ -116,6 +116,11 @@
       <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/symfony/polyfill-uuid" />
       <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/egulias/email-validator" />
       <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/doctrine/event-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/doctrine/deprecations" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

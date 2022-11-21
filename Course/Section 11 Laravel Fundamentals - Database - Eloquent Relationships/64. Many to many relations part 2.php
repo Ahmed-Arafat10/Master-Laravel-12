@@ -1,0 +1,19 @@
+<?php
+
+# then in user model class add
+
+function GetUserRoles()
+{
+    // return $this->belongsToMany('App\Models\Role');
+}
+
+
+# finally create a route
+
+// many-to-many relationship
+Route::get('/get_user_roles/{id}', function ($id) {
+    $user = User::find($id)->GetUserRoles;
+    // note: you can chain function like following example, but in this case you must add () of function GetUserRoles
+    //$user = User::find($id)->GetUserRoles()->orderBy('id', 'asc')->get();
+    return $user;
+});
