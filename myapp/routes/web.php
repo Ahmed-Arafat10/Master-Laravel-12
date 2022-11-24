@@ -281,3 +281,31 @@ Route::get('/get_user_roles/{id}', function ($id) {
     //$user = User::find($id)->GetUserRoles()->orderBy('id', 'asc')->get();
     return $user;
 });
+
+// many-to-many relationship
+Route::get('/get_role_user/{id}', function ($id) {
+    $role = \App\Models\Role::find($id)->GetUserData;
+    // note: you can chain function like following example, but in this case you must add () of function GetUserRoles
+    //$user = User::find($id)->GetUserRoles()->orderBy('id', 'asc')->get();
+    return $role;
+});
+
+
+Route::get('user/pivot/{id}', function ($id) {
+    $user = User::find($id)->GetUserRoles2;
+    foreach ($user as $item) {
+        // pivot will return -> {"user_id":2,"role_id":2}
+        echo $item . "<br>";
+        //echo $item->pivot->created_at . "<br>";
+    }
+});
+
+use \App\Models\Country;
+
+Route::get('user/country/{id}', function ($id) {
+    $country = Country::find($id);
+    foreach ($country->posts as $item) {
+        echo "<pre>";
+        echo $item;
+    }
+});

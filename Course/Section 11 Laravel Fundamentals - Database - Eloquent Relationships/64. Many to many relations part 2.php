@@ -2,6 +2,7 @@
 
 # then in user model class add
 
+// this will return for each role in pivot table record of that role in `role` table
 function GetUserRoles()
 {
     // return $this->belongsToMany('App\Models\Role');

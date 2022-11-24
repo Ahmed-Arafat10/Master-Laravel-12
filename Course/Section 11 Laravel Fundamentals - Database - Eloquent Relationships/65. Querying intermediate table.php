@@ -1,0 +1,47 @@
+<?php
+
+# now we will see the parameters of belongsToMany() function
+function GetUserRoles()
+{
+    // return $this->belongsToMany('App\Models\Role','USER_ROLE','USER_ID','ROLE_ID');
+    /*
+     - Parameter #1 -> the model class of the table that there is a relationship with it
+     - Parameter #2 -> the name of pivot or intermediary table
+     - Parameter #3 -> name of FK of current table `user`
+     - Parameter #4 -> name of FK of other table `role`
+     - We do all of this if we don't follow Laravel convention of names of pivot table or FK of both tables
+     */
+}
+
+# in role table
+
+function GetUserData()
+{
+    //return $this->belongsToMany('App\Models\User');
+}
+
+// many-to-many relationship
+Route::get('/get_role_user/{id}', function ($id) {
+    $role = \App\Models\Role::find($id)->GetUserData;
+    // note: you can chain function like following example, but in this case you must add () of function GetUserRoles
+    //$user = User::find($id)->GetUserRoles()->orderBy('id', 'asc')->get();
+    return $role;
+});
+
+function GetUserRoles2()
+{
+    // withPivot() function takes column you want to show from pivot table in pivot property
+    // OP -> "pivot":{"user_id":2,"role_id":2,"created_at":"2022-11-09T04:00:37.000000Z","updated_at":null}
+    // return $this->belongsToMany('App\Models\Role')->withPivot('created_at', 'updated_at');
+}
+
+
+Route::get('user/pivot/{id}', function ($id) {
+    $user = User::find($id)->GetUserRoles2;
+    foreach ($user as $item) {
+        // pivot will return -> {"user_id":2,"role_id":2}
+        echo $item . "<br>";
+        # means inside object $item access `pivot` object then inside it access `created_at` attribute
+        //echo $item->pivot->created_at . "<br>";
+    }
+});

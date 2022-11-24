@@ -52,8 +52,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Post', 'User_ID', 'id');
     }
 
+    // this will return for each role in pivot table record of that role in `role` table
     public function GetUserRoles()
     {
         return $this->belongsToMany('App\Models\Role');
+    }
+
+    public function GetUserRoles2()
+    {
+        return $this->belongsToMany('App\Models\Role')->withPivot('created_at', 'updated_at');
     }
 }

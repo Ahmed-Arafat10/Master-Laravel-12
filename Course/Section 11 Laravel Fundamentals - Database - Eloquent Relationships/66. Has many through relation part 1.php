@@ -1,0 +1,38 @@
+<?php
+
+/*
+- what we want to do is to create a `countries` table & add a column `country_id` in user table
+- so we will first create a model & migration files for `countries` table
+- then a migration file to add new column `country_id` to user table
+$ php artisan make:model Country -m
+- then
+$ php artisan make:migration create_country_id_in_users_table --table=users
+- in migration file for creating `countries` table
+ */
+Schema::create('countries', function (Blueprint $table) {
+    $table->id();
+    $table->string('country_name');
+    $table->timestamps();
+});
+
+# while in other migration file to add new column in user table
+
+function up()
+{
+    Schema::table('users', function (Blueprint $table) {
+        $table->integer('country_id');
+    });
+}
+
+/**
+ * Reverse the migrations.
+ *
+ * @return void
+ */
+function down()
+{
+    Schema::table('users', function (Blueprint $table) {
+        $table->dropColumn('country_id');
+    });
+}
+
