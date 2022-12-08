@@ -309,3 +309,20 @@ Route::get('user/country/{id}', function ($id) {
         echo $item;
     }
 });
+
+
+Route::get('/user/photo/{id}', function ($id) {
+    $user = User::find($id);
+    echo $user;// {"id":1,"name":"arafat","email":"ahmed@gmail.com","email_verified_at":null,"created_at":null,"updated_at":null,"country_id":1}
+    foreach ($user->photos as $photo) {
+        echo $photo;// {"id":1,"path":"ahmed.png","imageable_id":1,"imageable_type":"App\\Models\\User","created_at":null,"updated_at":null}
+    }
+});
+
+Route::get('/post/photo/{id}', function ($id) {
+    $post = Post::find($id);
+    echo $post;// {"id":7,"title":"OOP","content":"hello OOP","created_at":"2022-11-17T02:07:04.000000Z","updated_at":"2022-11-17T02:07:04.000000Z","is_admin":0,"deleted_at":null,"User_ID":1}
+    foreach ($post->photos as $photo) {
+        echo $photo; // {"id":13,"path":"test.png","imageable_id":7,"imageable_type":"App\\Models\\Post","created_at":null,"updated_at":null}{"id":13,"path":"test.png","imageable_id":7,"imageable_type":"App\\Models\\Post","created_at":null,"updated_at":null}
+    }
+});
