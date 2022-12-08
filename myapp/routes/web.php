@@ -326,3 +326,29 @@ Route::get('/post/photo/{id}', function ($id) {
         echo $photo; // {"id":13,"path":"test.png","imageable_id":7,"imageable_type":"App\\Models\\Post","created_at":null,"updated_at":null}{"id":13,"path":"test.png","imageable_id":7,"imageable_type":"App\\Models\\Post","created_at":null,"updated_at":null}
     }
 });
+
+use \App\Models\Photo;
+
+// `{id}` is PK column of table `photo`
+Route::get('photo/{id}/corresponding_data', function ($id) {
+    $photo = Photo::findOrFail($id);
+    return $photo->imageable;
+});
+
+use App\Models\Video;
+
+Route::get('tags/{type}/{id}/corresponding_data', function ($type, $id) {
+    if ($type == "post") {
+        $Posts = Post::findOrFail($id);
+        echo $Posts;
+        foreach ($Posts->tags as $p) {
+            echo $p;
+        }
+    } else {
+        $videos = Video::findOrFail($id);
+        echo $videos;
+        foreach ($videos->tags as $video) {
+            echo $video;
+        }
+    }
+});
