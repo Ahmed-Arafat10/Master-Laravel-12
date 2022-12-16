@@ -352,3 +352,21 @@ Route::get('tags/{type}/{id}/corresponding_data', function ($type, $id) {
         }
     }
 });
+
+use App\Models\Tag;
+
+Route::get('searchbytag/{type}/{tag_id}', function ($type, $tag_id) {
+    $tag = Tag::Find($tag_id);
+    if ($type == "post") {
+        // now I'm printing the posts that have a polymorphic relationship with a specific tag {tag_id}
+        // all in `taggables` table
+        foreach ($tag->posts as $p) {
+            echo $p;
+        }
+    } else {
+        // same as above but this time with video not post
+        foreach ($tag->videos as $v) {
+            echo $v;
+        }
+    }
+});
