@@ -23,7 +23,8 @@ class Post extends Model
     // by default this array is empty, so you have to add columns you want to fill their values
     protected $fillable = [
         'title',
-        'content'
+        'content',
+        'User_ID'
     ];
 
     public function GetUserDataFromPost()
