@@ -68,4 +68,10 @@ class User extends Authenticatable
         return $this->morphMany('App\Models\Photo', 'imageable');
     }
 
+
+    public function address()
+    {
+        return $this->hasOne("App\Models\ztmp_address", "user_id");
+    }
+
 }

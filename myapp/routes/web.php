@@ -370,3 +370,44 @@ Route::get('searchbytag/{type}/{tag_id}', function ($type, $tag_id) {
         }
     }
 });
+
+
+use App\Models\ztmp_address;
+
+Route::get('/insert_user_address', function () {
+    $user = User::findOrFail(1);
+
+    $address = new ztmp_address(['name' => 'El-Haram']);
+    $user->address()->save($address);
+});
+
+
+Route::get('/update_user_address', function () {
+    //$address = ztmp_address::where('user_id',1);
+    //$address = ztmp_address::where('user_id',">=",1);
+    $address = ztmp_address::whereUserId(1)->first();
+    $address->name = "updated row1";
+    $address->save();
+});
+
+
+Route::get('/read_user_address', function () {
+    $user = User::findOrFail(1);
+    echo $user->address->name;
+});
+
+Route::get('/delete_user_address', function () {
+    $user = User::findOrFail(1);
+    $user->address->delete();
+});
+
+use App\Models\ztmp_post;
+use App\Models\ztmp_user;
+
+Route::get('/insert_user_ztmp_post', function () {
+    $user = ztmp_user::findOrFail(1);
+    //$ztemp_post = new ztmp_post(['title' => 'hello world', 'body' => 'testing the body']);
+    //$user->ztemp_post()->save($ztemp_post);
+    // Just in one line
+    $user->ztemp_post()->save(new ztmp_post(['title' => 'hello world lts', 'body' => 'testing the body lts']));
+});
