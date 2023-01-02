@@ -411,3 +411,33 @@ Route::get('/insert_user_ztmp_post', function () {
     // Just in one line
     $user->ztemp_post()->save(new ztmp_post(['title' => 'hello world lts', 'body' => 'testing the body lts']));
 });
+
+
+Route::get("/view_user_ztmp_post", function () {
+    $user = ztmp_user::findOrFail(1);
+    //dd($user->ztemp_post);
+    foreach ($user->ztemp_post as $SinglePost) {
+        echo $SinglePost->body . "<br>";
+    }
+});
+
+
+Route::get("/update_user_ztmp_post", function () {
+    $user = ztmp_user::findOrFail(1);
+    $post = $user->ztemp_post()->whereId(2)->update(['title' => "updated hello world"]);
+    //$post = $user->ztemp_post()->where('id',2)->update(['title' => "updated hello world"]);
+});
+
+
+Route::get("/delete_user_ztmp_post", function () {
+    $user = ztmp_user::findOrFail(1);
+    $post = $user->ztemp_post()->whereId(5)->delete();
+});
+
+use \App\Models\mtm_Role;
+use \App\Models\mtm_user;
+
+Route::get('/mtm_insert_role', function () {
+    $user = mtm_user::find(1);
+    $user->mtm_role()->save(new mtm_Role(['name' => "Back-End Developer"]));
+});
