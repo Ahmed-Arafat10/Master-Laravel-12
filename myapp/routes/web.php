@@ -441,3 +441,33 @@ Route::get('/mtm_insert_role', function () {
     $user = mtm_user::find(1);
     $user->mtm_role()->save(new mtm_Role(['name' => "Back-End Developer"]));
 });
+
+Route::get('/mtm_select_user_role', function () {
+    $user = mtm_user::findOrFail(1);
+
+    foreach ($user->mtm_role as $single_row) {
+        dd($single_row);
+        //echo $single_row;
+    }
+});
+
+Route::get('/mtm_update_user_role', function () {
+    $user = mtm_user::findOrFail(1);
+    if ($user->has('mtm_Role')) {
+        foreach ($user->mtm_role as $single) {
+            if ($single->name == "Front-End Developer") {
+                $single->name = "Updated Front-End Developer";
+                $single->save();
+            }
+        }
+    }
+});
+
+Route::get('/mtm_delete_user_role', function () {
+    $user = mtm_user::findOrFail(1);
+    //$user->mtm_role()->delete();
+    foreach ($user->mtm_role as $single) {
+        $single->whereId('16')->delete();
+        //dd($single);
+    }
+});
