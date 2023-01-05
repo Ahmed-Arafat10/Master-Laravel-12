@@ -471,3 +471,73 @@ Route::get('/mtm_delete_user_role', function () {
         //dd($single);
     }
 });
+
+
+# 101 start------------------------------------------------------
+
+// this route will create a new record in `mtm_role_user` between user with ID 1 & roles with ID 16
+Route::get('/attach', function () {
+    $user = mtm_user::findOrFail(1);
+    $user->mtm_role()->attach(16);
+});
+
+
+// this route will create delete ALL record(s) in `mtm_role_user` between user with ID 1 & roles with ID 16
+Route::get('/detach', function () {
+    $user = mtm_user::findOrFail(1);
+    $user->mtm_role()->detach(16);
+});
+
+
+Route::get('/sync', function () {
+    $user = mtm_user::findOrFail(1);
+    $user->mtm_role()->sync([17]);// must pass an array
+});
+
+
+# 101 end------------------------------------------------------
+
+
+###############################################################
+# Section 16 Database - Eloquent Polymorphic Relationship CRUD
+###############################################################
+
+
+# 104. start----------------------------------------------------
+use \App\Models\poly_staff;
+use \App\Models\poly_product;
+
+Route::get('poly_create', function () {
+    $staff = poly_staff::findOrFail(1);
+    $staff->image()->create(['path' => 'Ging.png']);
+});
+# 104. end----------------------------------------------------
+
+
+# 105. end----------------------------------------------------
+Route::get('poly_read', function () {
+    $staff = poly_staff::findOrFail(1);
+    foreach ($staff->image as $i) {
+        echo $i;
+        //echo $i->path;
+    }
+});
+# 105. end----------------------------------------------------
+
+
+# 106. start----------------------------------------------------
+Route::get('poly_update', function () {
+    $staff = poly_staff::findOrFail(1);
+    $p = $staff->image()->first();
+    $p->path = "Updated " . $p->path;
+    $p->save();
+});
+# 106. end----------------------------------------------------
+
+# 107. start----------------------------------------------------
+Route::get('poly_update', function () {
+    $staff = poly_staff::findOrFail(1);
+    $p = $staff->image()->delete();
+});
+# 107. end----------------------------------------------------
+
