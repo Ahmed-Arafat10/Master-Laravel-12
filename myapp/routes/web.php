@@ -541,3 +541,47 @@ Route::get('poly_update', function () {
 });
 # 107. end----------------------------------------------------
 
+
+# 108. start----------------------------------------------------
+Route::get('/assign', function () {
+    $staff = poly_staff::findOrFail(1);
+    $image = \App\Models\poly_photo::findOrFail(3);// ID of that record
+    $staff->image()->save($image);
+});
+
+Route::get('/reassign', function () {
+    $staff = poly_staff::findOrFail(1);
+    $staff->image()->whereId(3)->update(['imageable_id' => NULL, 'imageable_type' => NULL]);
+
+    //Or
+    //$image = \App\Models\poly_photo::findOrFail(3);// ID of that record
+    //$staff->image()->update(['imageable_id' => NULL, 'imageable_type' => NULL]);
+});
+
+
+# 108. end----------------------------------------------------
+
+
+############################################################################
+# Section 17: Database - Eloquent Polymorphic Many to Many Relationship CRUD
+############################################################################
+
+
+# 111. start---------------------------------------------------
+use App\Models\poly_mtm_tag;
+use App\Models\poly_mtm_post;
+use App\Models\poly_mtm_video;
+use App\Models\poly_mtm_taggable;
+
+Route::get('/poly_mtm_insert', function () {
+    $post = poly_mtm_post::create(['name' => 'My Post Ahmed']);
+    $tag1 = poly_mtm_tag::findOrFail(1);
+    $post->tags()->save($tag1);
+
+    $video = poly_mtm_video::create(['name' => 'My Video Ahmed']);
+    $tag2 = poly_mtm_tag::findOrFail(2);
+    $video->tags()->save($tag2);
+
+});
+# 111. end-----------------------------------------------------
+
