@@ -585,3 +585,50 @@ Route::get('/poly_mtm_insert', function () {
 });
 # 111. end-----------------------------------------------------
 
+# 112. start---------------------------------------------------
+
+Route::get('/poly_mtm_read', function () {
+
+    $post = poly_mtm_post::findOrFail(4);
+    echo "<pre>";
+    echo $post; // print data of that post
+    foreach ($post->tags as $singleTag) {
+        echo "<pre>";
+        echo $singleTag;// print tags & records from pivot table
+    }
+});
+
+
+Route::get('/poly_mtm_update', function () {
+
+//    $post = poly_mtm_post::findOrFail(4);
+//    foreach ($post->tags as $singleTag) {
+//        $singleTag->whereName('PHP')->update(['name' => 'updated PHP method #1']);
+//    }
+
+    // To insert in pivot table a new record
+    $post = poly_mtm_post::findOrFail(4);
+    $tag = poly_mtm_tag::findOrFail(2);
+    //$post->tags()->save($tag);
+    //$post->tags()->attach($tag);
+    $post->tags()->sync([1]);// remove a records of post with ID 4 not having a tag ID 1 & if there is no record with ID 1 then create a one
+
+});
+
+# 112. end-----------------------------------------------------
+
+
+# 113. start-----------------------------------------------------
+
+Route::get('/poly_mtm_delete', function () {
+    $post = poly_mtm_post::findOrFail(4);
+    foreach ($post->tags as $single) {
+        if ($single->pivot->tag_id == 2) {
+            echo $single->pivot;
+            $single->delete();// this will delete the tag with ID 2, not the record between it & post ID = 4
+        }
+        echo $single;
+    }
+});
+
+# 113. end-----------------------------------------------------
