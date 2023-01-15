@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Our CRUD Application
+|--------------------------------------------------------------------------
+*/
+
+use App\Http\Controllers\PostController;
+
+Route::resource('/post', PostController::class);
