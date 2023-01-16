@@ -3,7 +3,8 @@
 @section('content')
     <ul>
         @foreach($AllPosts as $post)
-            <li> Title: {{$post->title}} & Content: {{$post->content}} </li>
+            <li><a href="{{route('post.show',$post->id)}}"> Title: {{$post->title}} & Content: {{$post->content}} </a>
+            </li>
         @endforeach
     </ul>
 @endsection
