@@ -1,14 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <form method="POST" action="/post">
-        {{ csrf_field() }}
-        <label> Title:</label>
-        <input type="text" name="title">
-        <label> Content:</label>
-        <input type="text" name="content">
-        <input type="submit" name="submit">
-    </form>
+    {!! Form::open(['method'=>'POST','action'=>'App\Http\Controllers\PostController@store']) !!}
+    <div class="form-group">
+        {!! Form::label('title','Title:') !!}
+        {!! Form::text('title',null,['class'=>'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('content','Content:') !!}
+        {!! Form::text('content',null,['class'=>'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::submit('Create A Post',['class'=>'btn btn-primary']) !!}
+    </div>
+    {!! Form::close() !!}
 @endsection
 
 
