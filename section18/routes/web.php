@@ -26,11 +26,7 @@ Route::get('/', function () {
 
 use App\Http\Controllers\PostController;
 
-
-Route::resource('/post', PostController::class);
-
-Route::get('/delete_post', function () {
-    return view('MyPosts.delete');
+Route::group(['middleware' => 'web'], function () {
+    Route::resource('/post', PostController::class);
 });
-
 

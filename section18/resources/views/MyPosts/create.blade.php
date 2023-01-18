@@ -14,6 +14,15 @@
         {!! Form::submit('Create A Post',['class'=>'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
+
+    @if(count($errors) > 0)
+        <ul class="alert alert-danger">
+            @foreach($errors->all() as $SingleError)
+                <li>{{$SingleError}}</li>
+            @endforeach
+        </ul>
+    @endif
+
 @endsection
 
 
