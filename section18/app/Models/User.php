@@ -48,4 +48,14 @@ class User extends Authenticatable
         return $this->hasMany(App\Models\post::class, 'user_id', 'id');
     }
 
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value); // ahmed arafat -> Ahmed Arafat
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtoupper($value); // ahmed -> AHMED
+    }
+
 }
