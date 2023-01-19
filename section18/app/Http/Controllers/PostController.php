@@ -15,7 +15,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $AllPosts = post::all(); // like saying select *
+
+        //$AllPosts = post::all(); // like saying select *
+        //$AllPosts = post::latest()->get(); // like saying order by desc
+        $AllPosts = post::thisisahmed();
         return view('MyPosts.index', compact('AllPosts'));
     }
 
@@ -37,7 +40,14 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        post::create($request->all());
+        $input = $request->all();
+        $fileName = $request->file('myfile');
+        if ($fileName) {
+            $RealName = $fileName->getClientOriginalName();
+            $fileName->move('images', $RealName);
+            $input['path'] = $RealName;
+        }
+        post::create($input);
         return redirect('/post');
     }
 
