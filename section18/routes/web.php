@@ -60,3 +60,7 @@ Route::get('/setname', function () {
     $user->name = "arafat";
     $user->save();
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
