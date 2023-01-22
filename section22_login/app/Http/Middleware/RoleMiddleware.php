@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
@@ -16,7 +18,9 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        return redirect('/');
+        $user = Auth::user();
+        if ($user->isAdmin()) echo "Hello Admin";
+        else return redirect('/');
         return $next($request);
     }
 }

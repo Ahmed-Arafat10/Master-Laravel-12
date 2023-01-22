@@ -30,6 +30,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+
         'remember_token',
     ];
 
@@ -41,4 +42,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(role::class);
+    }
+
+    public function isadmin()
+    {
+        if ($this->role->name == "Admin") return 1;
+        return 0;
+    }
 }

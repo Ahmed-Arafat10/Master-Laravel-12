@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
+Route::get('/test_old', function () {
     Auth::logout();
 });
 
@@ -26,7 +26,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/testmiddleware', function () {
+Route::get('/test', function () {
 
-})->middleware(['testmymiddleware', 'auth'])->name('MyRoute');
+})->middleware('role')->name('MyRoute');
 
+use \App\Http\Controllers\AdminController;
+
+Route::get('/test2', [AdminController::class, 'index'], function () {
+
+});
