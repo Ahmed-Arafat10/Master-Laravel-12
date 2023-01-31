@@ -13,10 +13,9 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
-        $request->session()->put(['ahmed' => '123']);
-        $request->session()->forget('ahmed');
-        $request->session()->flush();
-        return $request->session()->all();
+        //$request->session()->flash('message', 'post is created');
+        $request->session()->reflash();
+        return $request->session()->get('message');
         //return $request->session()->get('ahmed');
     }
 }

@@ -35,3 +35,7 @@ use \App\Http\Controllers\AdminController;
 Route::get('/test2', [AdminController::class, 'index'], function () {
 
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
