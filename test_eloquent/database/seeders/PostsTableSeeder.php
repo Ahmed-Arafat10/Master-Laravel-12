@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Posts;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PostsTableSeeder extends Seeder
 {
@@ -15,6 +16,13 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')->insert([
+            'name' => str_random(10),
+            'role' => 2,
+            'is_active' => 1,
+            'email' => str_random(10) . '@gmail.com',
+            'password' => bcrypt('secret')
+        ]);
         $posts = [
             [
                 'title' => 'post one',
@@ -37,4 +45,5 @@ class PostsTableSeeder extends Seeder
             Posts::create($value);
         }
     }
+
 }
