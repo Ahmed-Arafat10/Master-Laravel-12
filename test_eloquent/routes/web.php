@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Posts;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,3 +44,4 @@ Route::resource('cars', \App\Http\Controllers\CarController::class);
 
 
 Route::get('/getcarfrommodel/{id}', [\App\Http\Controllers\CarController::class, 'show_carmodel']);
+

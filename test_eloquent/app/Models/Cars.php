@@ -9,6 +9,13 @@ class Cars extends Model
 {
     use HasFactory;
 
+    protected $fillable =
+        [
+            'name',
+            'founded',
+            'description'
+        ];
+
     public function mymodels()
     {
         // again eloquent use the name of the current model + '_id' = 'cars_id' as the FK column

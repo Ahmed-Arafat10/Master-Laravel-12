@@ -1,0 +1,68 @@
+````php
+php artisan make:seeder PostsTableSeeder
+````
+
+- inside `database` > `seeders` folder
+
+- whenever you want to interact with the database you have to
+  define a model
+
+````php
+php artisan make:model Posts -m
+````
+
+- our created seeder file
+
+````php
+    public function run()
+    {
+        $posts = [
+            [
+                'tittle' => 'post one',
+                'excerpt' => 'summary of post one',
+                'body' => 'body of post one',
+                'image_path' => 'Empty',
+                'is_published' => false,
+                'min_to_read' => 2
+            ],
+            [
+                'tittle' => 'post two',
+                'excerpt' => 'summary of post two',
+                'body' => 'body of post two',
+                'image_path' => 'Empty',
+                'is_published' => false,
+                'min_to_read' => 2
+            ]
+        ];
+        foreach ($posts as $key => $value) {
+            Posts::create($value);
+        }
+    }
+````
+
+- in `databaseseeder.php` file
+
+````php
+    public function run()
+    {
+        $this->call(PostsTableSeeder::class);
+    }
+````
+
+- to execute the seeder method #1
+
+````php
+php artisan migrate:reset
+````
+
+````php
+php artisan migrate -seed
+````
+
+- to execute the seeder method #2
+
+````php
+php artisan db:seed
+````
+
+[Click Me](https://www.youtube.com/watch?v=UN42ad3KXqQ)
