@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\CarModels;
 use App\Models\Cars;
+use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CarController extends Controller
 {
@@ -15,7 +17,9 @@ class CarController extends Controller
      */
     public function index()
     {
-        return "Working Bro ! ";
+        $res = Posts::where('id', '>=', 4)->FirstOrFail();
+        echo "<pre>";
+        var_dump($res->id);
     }
 
     /**
@@ -80,7 +84,7 @@ class CarController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
