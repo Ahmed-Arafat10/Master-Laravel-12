@@ -20,12 +20,25 @@ Route::get('/', function () {
 
 use \App\Http\Controllers\PostController;
 
-Route::view('/', 'blog.index');
+//Route::view('/', 'blog.index');
+//
+//Route::get('/blog', [PostController::class, 'index'])
+//    ->name('blog.index');
+//
+//Route::get('/blog/{id}', [PostController::class, 'show'])
+//    ->name('blog.show');
+//
+//Route::resource('/blog',PostController::class);
 
-Route::get('/blog', [PostController::class, 'index'])
-    ->name('blog.index');
+Route::prefix('/blog')->group(function () {
+    Route::get('/blog', [PostController::class, 'index']);
+    Route::get('/blog/{id}', [PostController::class, 'show']);
+    Route::get('/blog/create', [PostController::class, 'create']);
+    Route::post('/blog', [PostController::class, 'store']);
+    Route::get('/blog/edit/{id}', [PostController::class, 'edit']);
+    Route::patch('/blog/{id}', [PostController::class, 'update']);
+    Route::delete('/blog/{id}', [PostController::class, 'destroy']);
+});
 
-Route::get('/blog/{id}', [PostController::class, 'show'])
-    ->name('blog.show');
-
-Route::resource('/blog',PostController::class);
+use \App\Http\Controllers\FallbackController;
+Route::fallback(FallbackController::class);
