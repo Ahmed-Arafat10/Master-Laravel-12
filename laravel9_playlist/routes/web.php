@@ -41,10 +41,31 @@ Route::prefix('/blog')->group(function () {
 });
 
 use \App\Http\Controllers\FallbackController;
+
 Route::fallback(FallbackController::class);
 
 
-Route::get('/getmac',function (){
+Route::get('/getmac', function () {
     $macAddr = shell_exec('getmac');
     dd($macAddr);
 });
+
+
+# Used to create a new user
+use \App\Models\User;
+
+Route::get('/createuser/{name}/{email}/{pass}', function ($name, $email, $pass) {
+    User::create([
+        'name' => $name,
+        'email' => $email,
+        'password' => $pass
+    ]);
+})->where([
+    'name' => '[A-Za-z]+',
+    'email' => '[A-Za-z]+',
+    'pass' => '[A-Za-z0-9]+'
+]);
+
+Route::get('/show/{id}', [PostController::class, 'show'])
+    ->whereNumber('id')
+    ->name('MyShowRoute');

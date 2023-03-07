@@ -22,7 +22,8 @@ class PostsFactory extends Factory
             'body' => $this->faker->text(),
             'image_path' => $this->faker->imageUrl(640, 480), // width & height of the image
             'is_published' => 1,
-            'min_to_read' => $this->faker->numberBetween(1, 10) // pick a number from range (1,10)
+            'min_to_read' => $this->faker->numberBetween(1, 10), // pick a number from range (1,10)
+            'user_id' => 1
         ];
 
     }

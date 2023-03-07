@@ -12,7 +12,7 @@ class Country extends Model
     public function posts()
     {
         /*
-         Countries -> Users -> Posts
+         Countries -> User -> Posts
         - this is the relation
         - to do that we first pass the `posts` model,  then intermediary table (`users` model)
         - then pass FK of intermediary table (`users` model) [you pass this parameter if you didn't follow Laravel convention]
