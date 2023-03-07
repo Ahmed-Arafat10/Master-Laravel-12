@@ -42,3 +42,9 @@ Route::prefix('/blog')->group(function () {
 
 use \App\Http\Controllers\FallbackController;
 Route::fallback(FallbackController::class);
+
+
+Route::get('/getmac',function (){
+    $macAddr = shell_exec('getmac');
+    dd($macAddr);
+});
