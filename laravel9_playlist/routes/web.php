@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\PostController;
+use \App\Http\Controllers\FallbackController;
+use \App\Models\User;
+use \App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-use \App\Http\Controllers\PostController;
-
 //Route::view('/', 'blog.index');
 //
 //Route::get('/blog', [PostController::class, 'index'])
@@ -30,30 +31,31 @@ use \App\Http\Controllers\PostController;
 //
 //Route::resource('/blog',PostController::class);
 
-Route::prefix('/blog')->group(function () {
-    Route::get('/blog', [PostController::class, 'index']);
-    Route::get('/blog/{id}', [PostController::class, 'show']);
-    Route::get('/blog/create', [PostController::class, 'create']);
-    Route::post('/blog', [PostController::class, 'store']);
-    Route::get('/blog/edit/{id}', [PostController::class, 'edit']);
-    Route::patch('/blog/{id}', [PostController::class, 'update']);
-    Route::delete('/blog/{id}', [PostController::class, 'destroy']);
-});
-
-use \App\Http\Controllers\FallbackController;
 
 Route::fallback(FallbackController::class);
 
 
-Route::get('/getmac', function () {
-    $macAddr = shell_exec('getmac');
-    dd($macAddr);
+Route::prefix('/blog')->group(function () {
+    Route::get('/create', [PostController::class, 'create'])
+        ->name('AddAPost');
+    Route::get('/', [PostController::class, 'index'])
+        ->name('ViewAllPosts');
+    Route::get('/{id}', [PostController::class, 'show'])
+        ->name('ShowSinglePost');
+    Route::post('/', [PostController::class, 'store'])
+        ->name('StoreANewPost');;
+    Route::get('/edit/{id}', [PostController::class, 'edit']);
+    Route::patch('/{id}', [PostController::class, 'update']);
+    Route::delete('/{id}', [PostController::class, 'destroy']);
 });
+
+//Route::get('/getmac', function () {
+//    $macAddr = shell_exec('getmac');
+//    dd($macAddr);
+//});
 
 
 # Used to create a new user
-use \App\Models\User;
-
 Route::get('/createuser/{name}/{email}/{pass}', function ($name, $email, $pass) {
     User::create([
         'name' => $name,
@@ -65,7 +67,3 @@ Route::get('/createuser/{name}/{email}/{pass}', function ($name, $email, $pass) 
     'email' => '[A-Za-z]+',
     'pass' => '[A-Za-z0-9]+'
 ]);
-
-Route::get('/show/{id}', [PostController::class, 'show'])
-    ->whereNumber('id')
-    ->name('MyShowRoute');
