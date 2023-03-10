@@ -34,7 +34,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -96,7 +96,7 @@ class PostController extends Controller
 
     public function Contact33()
     {
-        
+
         $people = ["ahmed", 'mohamed', 'yousry', 'arafat'];
         return view('testblade.contact33', compact('people'));
     }

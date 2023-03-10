@@ -44,8 +44,10 @@ Route::prefix('/blog')->group(function () {
         ->name('ShowSinglePost');
     Route::post('/', [PostController::class, 'store'])
         ->name('StoreANewPost');;
-    Route::get('/edit/{id}', [PostController::class, 'edit']);
-    Route::patch('/{id}', [PostController::class, 'update']);
+    Route::get('/edit/{id}', [PostController::class, 'edit'])
+    ->name('GetPostToUpdate');
+    Route::patch('/{id}', [PostController::class, 'update'])
+    ->name('UpdateAPost');
     Route::delete('/{id}', [PostController::class, 'destroy']);
 });
 

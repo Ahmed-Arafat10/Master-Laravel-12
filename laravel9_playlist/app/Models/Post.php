@@ -9,4 +9,13 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title', 'excerpt', 'body', 'image_path', 'is_published', 'min_to_read', 'user_id'
+    ];
+
+    private $dir = '/images/';
+    public function getImagePathAttribute($value)
+    {
+        return $this->dir . $value;
+    }
 }

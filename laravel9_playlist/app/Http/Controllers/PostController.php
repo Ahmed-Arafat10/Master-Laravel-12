@@ -43,7 +43,40 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        return "yes";
+        //dd($request->all());// Get all the form data
+        //dd($request->_token);// Get _token attribute from the form
+//
+//        # Method #1 using PHP OOP
+//        # As you can see the name of the inputs are like the database column
+//        $post = new Post();
+//        $post->title = $request->title;
+//        $post->excerpt = $request->excerpt;
+//        $post->body = $request->body;
+//        $post->image_path = 'temporary';
+//        $post->is_published = $request->is_published === 'on';
+//        $post->min_to_read = $request->min_to_read;
+//        $post->user_id = 1;
+//        $post->save();
+
+        $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'excerpt' => 'required',
+            'body' => 'required',
+            'image' => ['required', 'mimes:jpq,png,jpeg', 'max:5048'],
+            'min_to_read' => 'min:0|max:60',
+        ]);
+
+        # Method #2 using Eloquent
+        Post::create([
+            'title' => $request->title,
+            'excerpt' => $request->excerpt,
+            'body' => $request->body,
+            'image_path' => $this->storeImage($request),
+            'is_published' => $request->is_published === 'on',
+            'min_to_read' => $request->min_to_read,
+            'user_id' => 1,
+        ]);
+        return redirect(route('ViewAllPosts'));
     }
 
     /**
@@ -58,21 +91,23 @@ class PostController extends Controller
         ]);
     }
 //
-//    /**
-//     * Show the form for editing the specified resource.
-//     */
-//    public function edit(string $id): Response
-//    {
-//        //
-//    }
-//
-//    /**
-//     * Update the specified resource in storage.
-//     */
-//    public function update(Request $request, string $id): RedirectResponse
-//    {
-//        //
-//    }
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        return view('blog.edit',[
+            'SinglePost' => Post::findOrFail($id)
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        return $request->all();
+    }
 //
 //    /**
 //     * Remove the specified resource from storage.
@@ -81,4 +116,11 @@ class PostController extends Controller
 //    {
 //        //
 //    }
+
+    private function storeImage(Request $request)
+    {
+        $newImage = uniqid() . '_' . $request->title . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $newImage);
+        return $newImage;
+    }
 }

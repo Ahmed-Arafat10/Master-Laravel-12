@@ -29,7 +29,7 @@
     <h4 class="text-left sm:text-center text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 py-10 sm:py-20">
         {{ $SinglePost->title }}
     </h4>
-
+    <img height="100px" width="100px" src="{{ $SinglePost->image_path }}" alt="" srcset="">
     <div class="block lg:flex flex-row">
         <div class="basis-9/12 text-center sm:block sm:text-left">
                 <span
@@ -40,7 +40,7 @@
                         class="font-bold text-green-500 italic hover:text-green-400 hover:border-b-2 border-green-400 pb-3 transition-all py-20">
                         Code With Dary
                     </a>
-                    On 17-07-2022
+                    On  {{ $SinglePost->updated_at }}
                 </span>
         </div>
     </div>
@@ -54,6 +54,11 @@
             {{ $SinglePost->body }}
         </p>
     </div>
+    <a
+        href="{{ route('GetPostToUpdate',$SinglePost->id) }}"
+        class="font-bold text-green-500 italic hover:text-green-400 hover:border-b-2 border-green-400 pb-3 transition-all py-20">
+        Edit Post
+    </a>
 </div>
 </body>
 </html>
