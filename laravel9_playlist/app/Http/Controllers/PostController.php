@@ -91,12 +91,13 @@ class PostController extends Controller
         ]);
     }
 //
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
-        return view('blog.edit',[
+        return view('blog.edit', [
             'SinglePost' => Post::findOrFail($id)
         ]);
     }
@@ -106,16 +107,23 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return $request->all();
+        Post::findOrFail($id)->update([
+            $request->except([
+                '_token', '_method'
+            ]),
+            'user_id' => 1
+        ]);
+        return redirect(route('ViewAllPosts'));
     }
-//
-//    /**
-//     * Remove the specified resource from storage.
-//     */
-//    public function destroy(string $id): RedirectResponse
-//    {
-//        //
-//    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id): RedirectResponse
+    {
+        Post::destroy($id);
+        return redirect(route('ViewAllPosts'))->with('message','Post Is Deleted Successfully');
+    }
 
     private function storeImage(Request $request)
     {

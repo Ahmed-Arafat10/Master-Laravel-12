@@ -69,7 +69,7 @@
                     </span>
                     <input
                         type="file"
-                        name="image"
+                        name="image_path"
                         class="hidden">
                 </label>
             </div>

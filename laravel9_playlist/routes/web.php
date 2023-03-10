@@ -48,7 +48,8 @@ Route::prefix('/blog')->group(function () {
     ->name('GetPostToUpdate');
     Route::patch('/{id}', [PostController::class, 'update'])
     ->name('UpdateAPost');
-    Route::delete('/{id}', [PostController::class, 'destroy']);
+    Route::delete('/{id}', [PostController::class, 'destroy'])
+    ->name('DeleteAPost');
 });
 
 //Route::get('/getmac', function () {

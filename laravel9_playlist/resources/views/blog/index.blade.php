@@ -34,6 +34,10 @@
     </div>
 </div>
 
+@if(session()->has('message'))
+    <h1>{{session()->get('message')}}</h1>
+@endif
+
 <div class="w-4/5 mx-auto pb-10">
     @foreach($AllPosts as $SinglePost)
         <div class="bg-white pt-10 rounded-lg drop-shadow-2xl sm:basis-3/4 basis-full sm:mr-8 pb-10 sm:pb-0">

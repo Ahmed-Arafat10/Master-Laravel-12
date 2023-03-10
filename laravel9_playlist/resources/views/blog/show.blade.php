@@ -59,6 +59,14 @@
         class="font-bold text-green-500 italic hover:text-green-400 hover:border-b-2 border-green-400 pb-3 transition-all py-20">
         Edit Post
     </a>
+      <form
+        action="{{ route('DeleteAPost',$SinglePost->id) }}"
+        method="POST"
+        class="font-bold text-green-500 italic hover:text-green-400 hover:border-b-2 border-green-400 pb-3 transition-all py-20">
+          @csrf
+          @method('DELETE')
+          <button type="submit">Delete The Post</button>
+      </form>
 </div>
 </body>
 </html>
