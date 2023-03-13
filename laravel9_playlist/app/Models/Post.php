@@ -18,4 +18,11 @@ class Post extends Model
     {
         return $this->dir . $value;
     }
+
+    # Singular as each post will be related to a user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

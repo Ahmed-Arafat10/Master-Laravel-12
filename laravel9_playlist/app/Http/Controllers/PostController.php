@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostFormRequest;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -125,5 +126,13 @@ class PostController extends Controller
         $newImage = uniqid() . '_' . $request->title . '.' . $request->image_path->extension();
         $request->image_path->move(public_path('images'), $newImage);
         return $newImage;
+    }
+
+    public function ShowAllPostsForAUser(int $id)
+    {
+        //dd($Allposts->posts);
+        return view('blog.PostsForSpecificUser',[
+            'AllPostsForThatUser' => User::findOrFail($id)->posts
+        ]);
     }
 }
