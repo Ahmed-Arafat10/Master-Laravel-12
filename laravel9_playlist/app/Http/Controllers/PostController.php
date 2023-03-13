@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostFormRequest;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class PostController extends Controller
         $post6 = Post::get()->count();// Count number of rows
         $post7 = Post::sum('min_to_read');// Get the sum
         $post8 = Post::avg('min_to_read');// Get the average
-        $postLTS = Post::orderBy('updated_at', 'desc')->get();// Get all posts order by updated_at in descending order
+        $postLTS = Post::orderBy('updated_at', 'desc')->paginate(25);// Get all posts order by updated_at in descending order
         return view('blog.index', [
             'AllPosts' => $postLTS
         ]);
@@ -41,7 +42,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostFormRequest $request)
     {
         //dd($request->all());// Get all the form data
         //dd($request->_token);// Get _token attribute from the form
@@ -58,13 +59,7 @@ class PostController extends Controller
 //        $post->user_id = 1;
 //        $post->save();
 
-        $request->validate([
-            'title' => 'required|unique:posts|max:255',
-            'excerpt' => 'required',
-            'body' => 'required',
-            'image' => ['required', 'mimes:jpq,png,jpeg', 'max:5048'],
-            'min_to_read' => 'min:0|max:60',
-        ]);
+        $request->validated();
 
         # Method #2 using Eloquent
         Post::create([
@@ -105,14 +100,14 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostFormRequest $request, string $id)
     {
-        Post::findOrFail($id)->update([
-            $request->except([
-                '_token', '_method'
-            ]),
-            'user_id' => 1
+        $request->validated();
+        $arr = $request->except([
+            '_token', '_method'
         ]);
+        $arr['user_id'] = 1;
+        Post::findOrFail($id)->update($arr);
         return redirect(route('ViewAllPosts'));
     }
 
@@ -122,13 +117,13 @@ class PostController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         Post::destroy($id);
-        return redirect(route('ViewAllPosts'))->with('message','Post Is Deleted Successfully');
+        return redirect(route('ViewAllPosts'))->with('message', 'Post Is Deleted Successfully');
     }
 
     private function storeImage(Request $request)
     {
-        $newImage = uniqid() . '_' . $request->title . '.' . $request->image->extension();
-        $request->image->move(public_path('images'), $newImage);
+        $newImage = uniqid() . '_' . $request->title . '.' . $request->image_path->extension();
+        $request->image_path->move(public_path('images'), $newImage);
         return $newImage;
     }
 }

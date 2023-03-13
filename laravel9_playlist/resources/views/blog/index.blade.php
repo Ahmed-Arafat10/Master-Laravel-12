@@ -66,6 +66,10 @@
             </div>
         </div>
     @endforeach
+    <div style="margin: auto;padding-bottom: 10px; width: 10%" class="mx-auto pb-10 w-4/5">
+        {{$AllPosts->links()}}
+    </div>
+
 </div>
 </body>
 </html>
