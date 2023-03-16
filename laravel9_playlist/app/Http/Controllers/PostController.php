@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -45,33 +46,25 @@ class PostController extends Controller
      */
     public function store(PostFormRequest $request)
     {
-        //dd($request->all());// Get all the form data
-        //dd($request->_token);// Get _token attribute from the form
-//
-//        # Method #1 using PHP OOP
-//        # As you can see the name of the inputs are like the database column
-//        $post = new Post();
-//        $post->title = $request->title;
-//        $post->excerpt = $request->excerpt;
-//        $post->body = $request->body;
-//        $post->image_path = 'temporary';
-//        $post->is_published = $request->is_published === 'on';
-//        $post->min_to_read = $request->min_to_read;
-//        $post->user_id = 1;
-//        $post->save();
-
         $request->validated();
-
         # Method #2 using Eloquent
-        Post::create([
+        $post = Post::create([
             'title' => $request->title,
             'excerpt' => $request->excerpt,
             'body' => $request->body,
             'image_path' => $this->storeImage($request),
             'is_published' => $request->is_published === 'on',
             'min_to_read' => $request->min_to_read,
-            'user_id' => 1,
+            'user_id' => Auth::id(),
         ]);
+
+        $post->meta()->create([
+            'post_id' => $post->id,
+            'meta_description' => $request->meta_description,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_robots' => $request->meta_robots
+        ]);
+
         return redirect(route('ViewAllPosts'));
     }
 

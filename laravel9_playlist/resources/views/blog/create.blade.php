@@ -71,6 +71,23 @@
                 </label>
             </div>
 
+
+            <input
+                type="text"
+                name="meta_description"
+                placeholder="meta_description..."
+                class="bg-transparent block border-b-2 w-full h-20 text-2xl outline-none">
+            <input
+                type="text"
+                name="meta_keywords"
+                placeholder="meta_keywords..."
+                class="bg-transparent block border-b-2 w-full h-20 text-2xl outline-none">
+            <input
+                type="text"
+                name="meta_robots"
+                placeholder="meta_robots..."
+                class="bg-transparent block border-b-2 w-full h-20 text-2xl outline-none">
+
             <button
                 type="submit"
                 class="uppercase mt-15 bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">
