@@ -35,4 +35,10 @@ class Post extends Model
     {
         return $this->hasOne(PostMeta::class);
     }
+
+    # one post will have many categories
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

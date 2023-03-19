@@ -27,7 +27,7 @@ class PostController extends Controller
         $post6 = Post::get()->count();// Count number of rows
         $post7 = Post::sum('min_to_read');// Get the sum
         $post8 = Post::avg('min_to_read');// Get the average
-        $postLTS = Post::orderBy('updated_at', 'desc')->paginate(25);// Get all posts order by updated_at in descending order
+        $postLTS = Post::orderBy('id')->paginate(25);// Get all posts order by updated_at in descending order
         return view('blog.index', [
             'AllPosts' => $postLTS
         ]);

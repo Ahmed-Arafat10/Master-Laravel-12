@@ -39,6 +39,11 @@
     <h4 class="text-left sm:text-center text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 py-10 sm:py-20">
         {{ $SinglePost->title }}
     </h4>
+    <p class="pt-4 italic">
+        Categories: @foreach($SinglePost->categories as $singleCat)
+            {{ $singleCat->title  }}
+        @endforeach
+    </p>
     <img height="100px" width="100px" src="{{ $SinglePost->image_path }}" alt="" srcset="">
     <div class="block lg:flex flex-row">
         <div class="basis-9/12 text-center sm:block sm:text-left">

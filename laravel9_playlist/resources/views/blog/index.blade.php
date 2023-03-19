@@ -56,7 +56,7 @@
                     Made by:
                         <a href=""
                            class="text-green-500 italic hover:text-green-400 hover:border-b-2 border-green-400 pb-3 transition-all">
-                           {{$SinglePost->user->name}}
+                           {{$SinglePost->user ? $SinglePost->user->name : ''}}
                         </a>
                     on {{ $SinglePost->updated_at }}
                 </span>
