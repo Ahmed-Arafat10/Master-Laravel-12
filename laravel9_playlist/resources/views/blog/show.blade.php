@@ -19,13 +19,8 @@
     <meta name="robots"
           content="{{ $SinglePost->meta ? $SinglePost->meta->meta_robots : ''  }}">
 
-    <title>
-        Laravel App
-    </title>
-    <link
-        rel="stylesheet"
-        href="{{ asset('css/app.css') }}"
-    />
+    <title>Laravel App</title>
+    @vite('resources/css/app.css')
 </head>
 <body>
 <div class="w-4/5 mx-auto">
@@ -69,19 +64,21 @@
             {{ $SinglePost->body }}
         </p>
     </div>
-    <a
-        href="{{ route('GetPostToUpdate',$SinglePost->id) }}"
-        class="font-bold text-green-500 italic hover:text-green-400 hover:border-b-2 border-green-400 pb-3 transition-all py-20">
-        Edit Post
-    </a>
-    <form
-        action="{{ route('DeleteAPost',$SinglePost->id) }}"
-        method="POST"
-        class="font-bold text-green-500 italic hover:text-green-400 hover:border-b-2 border-green-400 pb-3 transition-all py-20">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Delete The Post</button>
-    </form>
+    @if(Auth::id() === $SinglePost->user_id)
+        <a
+            href="{{ route('GetPostToUpdate',$SinglePost->id) }}"
+            class="font-bold text-green-500 italic hover:text-green-400 hover:border-b-2 border-green-400 pb-3 transition-all py-20">
+            Edit Post
+        </a>
+        <form
+            action="{{ route('DeleteAPost',$SinglePost->id) }}"
+            method="POST"
+            class="font-bold text-green-500 italic hover:text-green-400 hover:border-b-2 border-green-400 pb-3 transition-all py-20">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete The Post</button>
+        </form>
+    @endif
 </div>
 </body>
 </html>

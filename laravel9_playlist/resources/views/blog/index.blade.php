@@ -12,10 +12,11 @@
     <title>
         Laravel App
     </title>
-    <link
-        rel="stylesheet"
-        href="{{ asset('css/app.css') }}"
-    />
+    @vite('resources/css/app.css')
+{{--    <link--}}
+{{--        rel="stylesheet"--}}
+{{--        href="{{ asset('css/app.css') }}"--}}
+{{--    />--}}
 </head>
 <body class="w-full h-full bg-gray-100">
 <div class="w-4/5 mx-auto">
@@ -25,13 +26,14 @@
         </h1>
         <hr class="border border-1 border-gray-300 mt-10">
     </div>
-
-    <div class="py-10 sm:py-20">
-        <a class="primary-btn inline text-base sm:text-xl bg-green-500 py-4 px-4 shadow-xl rounded-full transition-all hover:bg-green-400"
-           href="{{route('AddAPost')}}">
-            New Article
-        </a>
-    </div>
+    @if(Auth::user())
+        <div class="py-10 sm:py-20">
+            <a class="primary-btn inline text-base sm:text-xl bg-green-500 py-4 px-4 shadow-xl rounded-full transition-all hover:bg-green-400"
+               href="{{route('AddAPost')}}">
+                New Article
+            </a>
+        </div>
+    @endif
 </div>
 
 @if(session()->has('message'))
@@ -61,7 +63,7 @@
                     on {{ $SinglePost->updated_at }}
                 </span>
                 @if($SinglePost->image_path !== null)
-                    <img height="100px" width="100px" src="{{$SinglePost->image_path}}" alt="" >
+                    <img height="300px" width="300px" src="{{$SinglePost->image_path}}" alt="" >
                 @endif
             </div>
         </div>

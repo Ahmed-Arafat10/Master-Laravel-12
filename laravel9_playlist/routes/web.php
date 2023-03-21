@@ -84,9 +84,6 @@ Route::get('/showposts/{id}', [PostController::class, 'ShowAllPostsForAUser'])
     ])->name('ShowPostsForUser');
 
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,9 +95,6 @@ Route::get('/showposts/{id}', [PostController::class, 'ShowAllPostsForAUser'])
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
