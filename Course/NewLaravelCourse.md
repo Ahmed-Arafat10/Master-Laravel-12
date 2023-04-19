@@ -140,8 +140,177 @@ Route::get('/yes/{MeetingID}/{StudentID}', function ($MeetingID, $StudentID) {
 ->where(['StudentID' => '[0-9]+'])
 ->name('GetStudentAttendingSpecificMeeting');
 ````
+
+
+
+
+
+````php
+php artisan storage:link
+````
+
+
+- To retrieve the validated data from the $request object, you can call the $request->validated() method. This method returns an array of the validated data.
+````php
+$request->validated();
+````
+
+### Note that if the rules specified in form request are not obeyed, then the rest of the controller method will not automatically execute
+
+in Form Request
+````php
+public function rules()
+    {
+        if($this->route()->getActionMethod() == 'SignIn')
+        return [
+            'DoctorName' => 'required',
+            'MeetingPassword' => 'required',
+        ];
+
+        if($this->route()->getActionMethod() == 'MakeAttendance')
+            return [
+                'DoctorName' => 'required',
+                'MeetingPassword' => 'required',
+            ];
+    }
+````
+
+in Form Request
+````php
+public function messages()
+    {
+        if ($this->route()->getActionMethod() == 'SignIn')
+            return [
+                'DoctorName.required' => 'Please Enter Dr. Name',
+                'MeetingPassword.required' => 'Please Enter Meeting\'s password'
+            ];
+
+        if ($this->route()->getActionMethod() == 'MakeAttendance')
+            return [
+                'student_name.required' => 'Please Enter Your Name',
+                'student_id.required' => 'Please Enter Your ID',
+                'student_id.integer' => 'Only Numbers (Positive) Are Allowed',
+                'student_id.digits' => 'Please Add 0 To Your ID, Exp: 20190xxxx (Should Be 9 Digit Number)',
+            ];
+    }
+````
+
+
+## ChatGPT: add unique rule for column value
+- In Laravel, you can create a custom validation rule that checks if the input value is unique in the specified database table except for the current record being edited. Here's an example:
+````php
+use Illuminate\Validation\Rule;
+
+public function rules()
+{
+    $id = $this->route('id'); // get the current record ID from the route parameters
+    $tableName = 'users'; // replace with the name of your database table
+    $columnName = 'email'; // replace with the name of the column you want to validate
+
+    return [
+        'email' => [
+            'required',
+            'email',
+            Rule::unique($tableName, $columnName)->ignore($id, 'id'),
+        ],
+    ];
+}
+````
+> In this example, we use the `Rule::unique()` method to create a validation rule that checks if the input value is unique in the users table, except for the record with ID $id. The ignore() method tells Laravel to ignore the record with the specified ID when checking for uniqueness. The second argument to ignore() specifies the name of the primary key column in the table, which is id in this example.
+
+> Note that you need to replace users and email with the name of your database table and column name, respectively. Also, you need to make sure that the route parameter name matches the one used in the ignore() method.
+
+>The `ignore()` method is used in a Laravel validation rule to tell the validator to ignore a specific record when checking for uniqueness.
+For example, when editing an existing record, you want to allow the user to update the record without triggering a validation error for a field that already exists in the database. Without using ignore(), the validation rule would always return an error because the existing record in the database matches the updated value.
+So, by passing the ID of the current record to the `ignore()` method, Laravel knows to ignore that record when checking for uniqueness, allowing the user to update the record without triggering a validation error.
+
+
+## ChatGPT: different between store() and storeAs()
+- In Laravel, both store() and storeAs() methods are used to store uploaded files, but they differ in how they handle the filename of the stored file.
+The store() method is used to store the uploaded file with its original filename. For example, if the uploaded file has a filename of example.jpg, the store() method will store it with the same filename in the specified directory.
+````php
+$path = $request->file('file')->store('public');
+````
+> In this example, the uploaded file will be stored in the public directory with its original filename.
+On the other hand, the storeAs() method allows you to specify a custom filename for the stored file. For example, if you want to store the uploaded file with a specific filename like myfile.jpg, you can use the storeAs() method:
+
+````php
+$path = $request->file('file')->storeAs('public', 'myfile.jpg');
+````
+> In this example, the uploaded file will be stored in the public directory with the filename myfile.jpg. If a file with the same name already exists in the directory, it will be overwritten.
+In summary, the store() method is used when you want to store the uploaded file with its original filename, while the storeAs() method is used when you want to specify a custom filename for the stored file.
+
+
+- All you need to know to upload a file
+
+````php
+<body>
+<form method="POST"
+      action="{{ route('uploadimage') }}"
+      enctype="multipart/form-data">
+    @csrf
+
+    <input type="file" name="ImageInput" value="{{ old('ImageInput') }}">
+    <button type="submit">Click Me</button>
+</form>
+{{ Shared::ShowAllErrors($errors)}}
+</body>
+````
+
+- In Controller :
+````php
+public function UploadImage(StudentFormRequest $request)
+    {
+        //echo $request->file('ImageInput')->getClientOriginalName() . '<br>'; // ging.png
+        //echo $request->file('ImageInput')->getClientMimeType() . '<br>'; // image/png   application/x-msdownload
+        //echo $request->file('ImageInput')->getClientOriginalExtension() . '<br>'; // png
+        //echo $request->ImageInput->extension(); // other way to get extension of a file
+        //echo $request->file('ImageInput')->getPathname() . '<br>'; // C:\xampp\tmp\php551A.tmp
+        //echo $request->file('ImageInput')->getPath() . '<br>'; // C:\xampp\tmp\
+        //echo $request->file('ImageInput')->getFilename() . '<br>'; // php139B.tmp
+        //echo $request->file('ImageInput')->getSize(); // 101936
+        //echo $request->file('ImageInput')->getType();
+        //echo $request->hasFile('ImageInput'); // boolean
+        # make sure image name is valid, no : or - or spaces
+        $NewName = Carbon::now()->format('Y_m_d_h_i_s_') . $request->file('ImageInput')->getClientOriginalName();
+        //echo $NewName;
+        $path = $request->file('ImageInput')->storeAs('public/Images', $NewName);
+        $path = $request->file('ImageInput')->store('public/Images');
+        if ($path === false) echo "Something Went Wrong";
+    }
+````
+
+
+## ChatGPT : `failedValidation()`
+- `failedValidation()` is a method in `Laravel`'s Form Request class that is called if validation rules fail. You can override this method in your custom Form Request class to customize the response when validation fails, for example, by returning a custom error message or redirecting the user back with old input values.
+You can use this method to perform custom actions when validation fails. For example, you might want to log the error or send an email notification to an administrator. The `$validator` parameter in the `failedValidation()` method contains the validator instance, so you can access any validation errors or input data that was submitted with the request.
+````php
+    protected function failedValidation(Validator $validator)
+    {
+        $response = redirect()->route('ViewHome');
+        $response = redirect()
+            ->route('ViewHome')
+            ->withErrors($validator->errors())
+            ->withInput(['file' => $this->file('ImageInput')->getClientOriginalName()]);
+        throw new HttpResponseException($response);
+    }
+````
+
+## ChatGPT : `authorize()` in `FormRequest` 
+- In Laravel 9, the authorize() method in a form request is used to authorize the incoming request before the request is validated and processed by the controller.
+When a form request is instantiated, Laravel will automatically call the authorize() method. If the authorize() method returns false, Laravel will automatically abort the request with a 403 Forbidden response. If the authorize() method returns true, Laravel will continue processing the request.
+The authorize() method in a form request is often used to check if the authenticated user is authorized to perform the action requested by the incoming request. For example, if a user is trying to update a post, the authorize() method can check if the authenticated user is the owner of the post or has the necessary permissions to update the post.
+````php
+public function authorize()
+    {
+        return StudentService::Auth();
+    }
+````
+> If true then proceed the request otherwise show page 403 THIS ACTION IS UNAUTHORIZED.
+
 ### Search For
 1. route group
 2. switch blade
 3. fillable & hidden
 4. {{ }} and {!! !!}
+
