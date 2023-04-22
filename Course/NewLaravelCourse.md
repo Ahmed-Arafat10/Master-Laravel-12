@@ -65,10 +65,10 @@ public function messages()
     # title -> form input name
     # required -> rule name
     return [
-    'title.required' => "My Friend, This Field Is Required",
-    'title.min' => "My Friend, This Field Is Min",
-    'title.max' => "My Friend, This Field Is Min",
-    'title.unique' => "My Friend, This Field Is Min",
+    'title.required' => 'My Friend, This Field Is Required',
+    'title.min' => 'My Friend, This Field Is Min',
+    'title.max' => 'My Friend, This Field Is Min',
+    'title.unique' => 'My Friend, This Field Is Min',
         ];
 }
 ````
@@ -140,6 +140,49 @@ Route::get('/yes/{MeetingID}/{StudentID}', function ($MeetingID, $StudentID) {
 ->where(['StudentID' => '[0-9]+'])
 ->name('GetStudentAttendingSpecificMeeting');
 ````
+
+
+- To check if a table already exists (to prevent error when executing `php artisan serve`), as it executes the commands again 
+````php
+if (!Schema::hasTable('admin'))
+````
+
+
+- To check if one column already exists in a table 
+````php
+if(!Schema::hasColumn('meetings','password'))
+````
+> Pass table name then column name
+
+
+- To check if some columns already exist in a table
+````php
+if (!Schema::hasColumns('attendance', ['Date', 'IP_Address']))
+````
+> Pass table name then column names in an array
+
+
+- Encrypt `.env` file
+````php
+php artisan env:encrypt
+````
+
+- Decrypt `.env` file
+````php
+php artisan env:decrypt --key=base64:ifcek+9qNo3BMqslL8EgXoC2KB9winAzrghVneNWAAY=
+````
+
+- To view Laravel Documentation
+````php
+php artisan docs
+````
+
+<hr>
+
+> #### Update a project from 9.x to 10, Link : [Click Me](https://blog.devgenius.io/how-to-upgrade-from-laravel-9-x-to-laravel-10-x-926b826b454f)
+
+<hr>
+
 ### Search For
 1. route group
 2. switch blade
