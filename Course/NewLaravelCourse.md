@@ -458,6 +458,110 @@ php artisan docs
 <hr>
 
 
+- `.env` file
+````php
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=YourMail
+MAIL_PASSWORD=YourPassword
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS="YourMail"
+MAIL_FROM_NAME="${APP_NAME}"
+````
+
+````php
+php artisan make:mail welcome
+````
+
+in `app` > `Mail` > `welcome.php`
+````php
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+
+class welcome extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    /**
+     * Create a new message instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Get the message envelope.
+     */
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: 'TEST',
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'AhmedArafat',
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        return [];
+    }
+}
+````
+
+````php
+use Illuminate\Support\Facades\Cache;
+use App\Models\Attendance;
+
+Route::get('/makecache', function () {
+/*
+get
+put
+forget
+flush
+forever
+remember
+rememberForever
+ */
+Cache::remember('attendance', 10, function () {
+return Attendance::orderBy('Date', 'DESC')->get();
+});
+
+});
+Route::get('/cache', function () {
+return Cache::get('attendance');
+});
+
+Route::get('/mail', function () {
+\Illuminate\Support\Facades\Mail::to('EmailAddress@gmail.com')
+->send(new \App\Mail\welcome());
+});
+````
+
+
+
 
 ### Search For
 1. route group
