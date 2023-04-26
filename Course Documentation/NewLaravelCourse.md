@@ -458,7 +458,9 @@ php artisan docs
 <hr>
 
 
-- `.env` file
+## Mails In Laravel
+
+- In `.env` file:
 ````php
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
@@ -470,11 +472,12 @@ MAIL_FROM_ADDRESS="YourMail"
 MAIL_FROM_NAME="${APP_NAME}"
 ````
 
+- Create new mail class
 ````php
 php artisan make:mail welcome
 ````
 
-in `app` > `Mail` > `welcome.php`
+- In `app` > `Mail` > `welcome.php` :
 ````php
 <?php
 
@@ -531,6 +534,16 @@ class welcome extends Mailable
 }
 ````
 
+-In route file:
+````php
+Route::get('/mail', function () {
+    \Illuminate\Support\Facades\Mail::to('EmailAddress@gmail.com')
+        ->send(new \App\Mail\welcome());
+});
+````
+
+
+## Cache In Laravel
 ````php
 use Illuminate\Support\Facades\Cache;
 use App\Models\Attendance;
@@ -552,11 +565,6 @@ return Attendance::orderBy('Date', 'DESC')->get();
 });
 Route::get('/cache', function () {
 return Cache::get('attendance');
-});
-
-Route::get('/mail', function () {
-\Illuminate\Support\Facades\Mail::to('EmailAddress@gmail.com')
-->send(new \App\Mail\welcome());
 });
 ````
 
