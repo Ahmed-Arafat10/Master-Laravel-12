@@ -65,10 +65,10 @@ public function messages()
     # title -> form input name
     # required -> rule name
     return [
-    'title.required' => "My Friend, This Field Is Required",
-    'title.min' => "My Friend, This Field Is Min",
-    'title.max' => "My Friend, This Field Is Min",
-    'title.unique' => "My Friend, This Field Is Min",
+    'title.required' => 'My Friend, This Field Is Required',
+    'title.min' => 'My Friend, This Field Is Min',
+    'title.max' => 'My Friend, This Field Is Min',
+    'title.unique' => 'My Friend, This Field Is Min',
         ];
 }
 ````
@@ -140,9 +140,6 @@ Route::get('/yes/{MeetingID}/{StudentID}', function ($MeetingID, $StudentID) {
 ->where(['StudentID' => '[0-9]+'])
 ->name('GetStudentAttendingSpecificMeeting');
 ````
-
-
-
 
 
 ````php
@@ -416,9 +413,158 @@ Route::post('/login', function (Request $request) {
 > Note that the named route must exist in your application's routes file, and you should make sure that the named route corresponds to the URL that the user originally requested.
 
 
+
+
+
+- To check if a table already exists (to prevent error when executing `php artisan serve`), as it executes the commands again
+````php
+if (!Schema::hasTable('admin'))
+````
+
+
+- To check if one column already exists in a table
+````php
+if(!Schema::hasColumn('meetings','password'))
+````
+> Pass table name then column name
+
+
+- To check if some columns already exist in a table
+````php
+if (!Schema::hasColumns('attendance', ['Date', 'IP_Address']))
+````
+> Pass table name then column names in an array
+
+
+- Encrypt `.env` file
+````php
+php artisan env:encrypt
+````
+
+- Decrypt `.env` file
+````php
+php artisan env:decrypt --key=base64:ifcek+9qNo3BMqslL8EgXoC2KB9winAzrghVneNWAAY=
+````
+
+- To view Laravel Documentation
+````php
+php artisan docs
+````
+
+<hr>
+
+> #### Update a project from 9.x to 10, Link : [Click Me](https://blog.devgenius.io/how-to-upgrade-from-laravel-9-x-to-laravel-10-x-926b826b454f)
+
+<hr>
+
+
+- `.env` file
+````php
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=YourMail
+MAIL_PASSWORD=YourPassword
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS="YourMail"
+MAIL_FROM_NAME="${APP_NAME}"
+````
+
+````php
+php artisan make:mail welcome
+````
+
+in `app` > `Mail` > `welcome.php`
+````php
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+
+class welcome extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    /**
+     * Create a new message instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Get the message envelope.
+     */
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: 'TEST',
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'AhmedArafat',
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        return [];
+    }
+}
+````
+
+````php
+use Illuminate\Support\Facades\Cache;
+use App\Models\Attendance;
+
+Route::get('/makecache', function () {
+/*
+get
+put
+forget
+flush
+forever
+remember
+rememberForever
+ */
+Cache::remember('attendance', 10, function () {
+return Attendance::orderBy('Date', 'DESC')->get();
+});
+
+});
+Route::get('/cache', function () {
+return Cache::get('attendance');
+});
+
+Route::get('/mail', function () {
+\Illuminate\Support\Facades\Mail::to('EmailAddress@gmail.com')
+->send(new \App\Mail\welcome());
+});
+````
+
+
+
+
 ### Search For
 1. route group
 2. switch blade
 3. fillable & hidden
 4. {{ }} and {!! !!}
-
