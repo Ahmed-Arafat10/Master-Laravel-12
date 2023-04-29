@@ -2,7 +2,7 @@
 #### Q2: so now whether ->with() method is long term or short term session
 #### Q3: okay now that is the difference between Session::put() and session()->put() in laravel 9
 #### Q4: what is Laravel's global helper functions
-#### Q5: i want a code example on points 1,2,3,6,9 please
+#### Q5: I want a code example on points 1,2,3,6,9 please
 #### Q6: what about collection global helper
 #### Q7: what are main methods with collect()
 #### Q8: what is callback function in php
@@ -162,6 +162,7 @@ I hope these examples help illustrate how the global helper functions can be use
 Sure! The `collect()` global helper function in Laravel is used to create a new instance of a collection class, which provides a convenient way to work with arrays of data. Here's an example of how to use it:
 
 ```php
+// A collection ia an array of arrays
 $data = [
     ['name' => 'John', 'age' => 32],
     ['name' => 'Mary', 'age' => 25],
@@ -169,7 +170,9 @@ $data = [
 ];
 
 $collection = collect($data);
-
+ 
+echo $data[1]['name']; // Mary
+ 
 // Filter the collection to include only people who are over 30 years old
 $filtered = $collection->filter(function ($item) {
     return $item['age'] > 30;

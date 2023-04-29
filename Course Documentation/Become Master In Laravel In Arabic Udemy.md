@@ -464,11 +464,11 @@ php artisan docs
 ````php
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
-MAIL_PORT=465
+MAIL_PORT=465|587
 MAIL_USERNAME=YourMail
 MAIL_PASSWORD=YourPassword
-MAIL_ENCRYPTION=ssl
-MAIL_FROM_ADDRESS="YourMail"
+MAIL_ENCRYPTION=ssl|tls
+MAIL_FROM_ADDRESS=YourMail
 MAIL_FROM_NAME="${APP_NAME}"
 ````
 
@@ -508,7 +508,7 @@ class welcome extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'TEST',
+            subject: 'This Is The Email Subject',
         );
     }
 
@@ -529,7 +529,11 @@ class welcome extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+            Attachment::fromPath('storage/IMG/gon.png')
+                ->as('Gon.png') // Optional
+                ->withMime('image/png') // Optional
+        ];
     }
 }
 ````
@@ -543,28 +547,36 @@ Route::get('/mail', function () {
 ````
 
 
-## Cache In Laravel
+### Cache In Laravel
 ````php
-use Illuminate\Support\Facades\Cache;
-use App\Models\Attendance;
-
-Route::get('/makecache', function () {
-/*
-get
-put
-forget
-flush
-forever
-remember
-rememberForever
- */
-Cache::remember('attendance', 10, function () {
-return Attendance::orderBy('Date', 'DESC')->get();
-});
-
-});
 Route::get('/cache', function () {
-return Cache::get('attendance');
+
+    $Admin = \App\CIC\Admin\Models\Admin::all();
+
+    # add a cache
+    Cache::put('AdminDataCached', $Admin, 10);
+
+    # get cache value with specific key
+    echo Cache::get('AdminDataCached');
+
+    # remove a key in cache
+    Cache::forget('AdminDataCached');
+
+    # remove all keys in cache
+    Cache::flush();
+    
+    # create a forever cache
+    Cache::forever('Admin', $Admin);
+
+    # create a temporary cache with closure method valid for 10 Minutes
+    Cache::remember('AttendanceTemp', 10, function () {
+        return Attendance::orderBy('Date', 'DESC')->get();
+    });
+
+    # create a forever cache with closure method
+    Cache::rememberForever('AttendanceForever', function () {
+        return Attendance::orderBy('Date', 'DESC')->get();
+    });
 });
 ````
 
