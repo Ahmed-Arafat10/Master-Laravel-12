@@ -48,6 +48,12 @@ Or
 @vite('resources/css/app.css')
 ````
 
+- In external css file:
+````php
+background-image: url("/public/images/doctor.png");
+````
+
+
 ### temp
 
 ````
