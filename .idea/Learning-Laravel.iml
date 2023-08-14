@@ -8,6 +8,14 @@
       <sourceFolder url="file://$MODULE_DIR$/myapp/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Projects While Learning/AuthApp_playlist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Projects While Learning/laravel9_playlist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Projects While Learning/myProject" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Projects While Learning/myapp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Projects While Learning/section18" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Projects While Learning/section22_login" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Projects While Learning/test_eloquent" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Projects While Learning/test_khub" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/tijsverkoyen/css-to-inline-styles" />
       <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/ramsey/collection" />
       <excludeFolder url="file://$MODULE_DIR$/myapp/vendor/ramsey/uuid" />
