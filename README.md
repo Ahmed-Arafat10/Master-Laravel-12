@@ -4,10 +4,13 @@
 Framework.
 
 ### Topics Discussed: 
-> MVC - Model - View - Controller - Migration - artisan - Middleware
-Factory - Eloquent ORM - Facade - Routes - Blade Template Engine - Authorization -
-Authorization - Laravel Breeze - Query Builder - Seeder - tinker - API - Email Sending -
-Configuration - Namespace -
-Response - Request - Validation - Rules - CSRF Protection - Localization - Cache - Cookies -
-Sessions - Response -
-File Uploading - Hashing
+> MVC - Model - View - Controller - Migration - Artisan - Middleware -
+Eloquent ORM - Relationships - Facade - Routes - Blade Template Engine - Authorization -
+Authorization - Laravel Breeze - Query Builder - Factory - Seeder - Tinker - APIs -
+Email Sending - Configuration - Namespace - Enum - Traits - Response - 
+Request - Validation - Rules - CSRF Protection - Localization - Cache - Cookies -
+Sessions - Response - File Uploading - Hashing - Image Intervention
+
+
+
+> To Be added : Broadcast - Events - Websocket - Laravel Sanctum - Roles - Form Class
