@@ -85,3 +85,35 @@ Route::get('/mail', function () {
         ->send(new \App\Mail\welcome());
 });
 ````
+
+
+- pass data to a view in mailer class
+````php
+protected Model $Data;
+
+    public function __construct($passedData)
+    {
+        $this->Data = $passedData;
+    }
+
+    /**
+     * Get the message envelope.
+     */
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: 'Email Subject',
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            'welcome', null, null, null, ['data' => $this->Data]
+        );
+
+    }
+````
