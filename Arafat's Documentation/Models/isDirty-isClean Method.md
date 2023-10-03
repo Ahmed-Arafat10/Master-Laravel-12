@@ -2,17 +2,17 @@ In Laravel's Eloquent ORM, the `isDirty()` and `isClean()` methods are used to c
 
 1. **isDirty() Method:**
 
-   The `isDirty($attributes = null)` method checks if specific attributes or any attributes have been modified on the model since it was retrieved from the database or since the last save operation. If you don't specify any attributes, it will check if any attributes on the model have been modified.
+The `isDirty($attributes = null)` method checks if specific attributes or any attributes have been modified on the model since it was retrieved from the database or since the last save operation. If you don't specify any attributes, it will check if any attributes on the model have been modified.
 
-   ```php
-   $user = User::find(1);
+```php
+$user = User::find(1);
 
-   // Check if the 'name' attribute has been modified
-   $isNameDirty = $user->isDirty('name');
+// Check if the 'name' attribute has been modified
+$isNameDirty = $user->isDirty('name');
 
-   // Check if any attributes have been modified
-   $isAnyAttributeDirty = $user->isDirty();
-   ```
+// Check if any attributes have been modified
+$isAnyAttributeDirty = $user->isDirty();
+```
 
    The `isDirty()` method returns `true` if the attribute(s) have been modified and `false` otherwise.
 
