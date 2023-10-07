@@ -1,4 +1,10 @@
 - create a `UserResource` class
+
+````php
+php artiasn make:resource UserResource
+````
+
+
 ````php
 class UserResource extends JsonResource
 {
@@ -42,4 +48,18 @@ class UserResource extends JsonResource
         return $attributes[$index] ?? null;
     }
 }
+````
+
+- Convert a collection
+
+````php
+ $data = TaskResource::collection(
+            Task::where('user_id', Auth::id())->get()
+        );
+````
+
+- Convert a single model instance (`findOrFail()`)
+
+````php
+$data = new TaskResource($task);
 ````

@@ -28,7 +28,7 @@ public function MakeAttendanceAPI(StudentFormRequest $request)
         // If inserted successfully
         if ($Val) return response()->json([
             'msq' => 'Done Inserting The Attendance',
-            'data' => Attendance::paginate(5)
+             'data' => Attendance::paginate(5)
         ], 200);
         // Otherwise
         else return response()->json([

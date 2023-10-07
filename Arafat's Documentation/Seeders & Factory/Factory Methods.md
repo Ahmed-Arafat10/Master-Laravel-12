@@ -1,4 +1,7 @@
 ````php
+'user_id' => User::all()->random()->id,
+'name' => $this->faker->unique()->sentence(),
+'description' => $this->faker->text(),
 'name' => $this->faker->word,
 'description' => $this->faker->paragraph()
 'description' => $this->faker->paragraph(2),
