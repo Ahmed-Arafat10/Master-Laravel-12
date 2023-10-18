@@ -11,7 +11,7 @@
 > Email Sending - Config - Namespace - Enum - Traits - Response -
 > Request - Validation - Rules - CSRF Protection - Cache - Cookies -
 > Sessions - Response - File Uploading - Hashing - Image Intervention
-> CORS - HATEOAS - Collections - Rate Limiter - Resources
+> CORS - HATEOAS - Collections - Rate Limiter - Resources - Events & Listener
 
 
-> To Be added : Ajax With Laravel - Broadcast - Events & Listener - Websocket - Laravel Sanctum - Gates & Policies (Permissions) - Form Class - Localization
+> To Be added : Ajax With Laravel - Broadcast - Websocket - Laravel Sanctum - Gates & Policies (Permissions) - Form Class - Localization - facade design pattern
