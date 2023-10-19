@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Facades\UserFacade;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -57,12 +58,54 @@ class GoogleController extends Controller
         $userData = json_decode($response->getBody());
 
         // Now you can store the user's Google ID in your database
-        dd($userData);
-        $googleId = $userData->id;
+        //dd($userData);
+        return UserFacade::signUpOrIn($userData->email, $userData->name, $userData->id);
+    }
+}
+````
 
-        // Perform database operations to store $googleId
+````php
+Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+````
 
-        return "Google ID stored in your database: $googleId";
+````php
+<?php
+
+namespace App\Http\Services;
+
+use App\Models\User;
+use App\Traits\ApiResponser;
+
+class UserService
+{
+    use ApiResponser;
+
+    public function signUpOrIn($email, $name, $googleID)
+    {
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            return $this->successResponse([
+                'status' => 'success',
+                'type' => 'SignIn',
+                'token' => $user->createToken($email)->plainTextToken
+            ], 200);
+        } else {
+            $name = explode(' ', $name);
+            $user = User::create([
+                'email' => $email,
+                'first_name' => $name[0],
+                'last_name' => $name[1],
+                'phone' => 'NA',
+                'avatar' => 'NA',
+                'google_id' => $googleID,
+            ]);
+            return $this->successResponse([
+                'status' => 'success',
+                'type' => 'SignUp',
+                'token' => $user->createToken($email)->plainTextToken
+            ], 201);
+        }
     }
 }
 ````
