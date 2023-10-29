@@ -1,0 +1,1 @@
+https://spatie.be/docs/laravel-permission/v6/basic-usage/basic-usage

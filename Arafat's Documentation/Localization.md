@@ -1,0 +1,1 @@
+https://laravel.com/docs/10.x/localization#using-translation-strings-as-keys
