@@ -42,6 +42,23 @@ MONGO_DB_DSN=mongodb+srv://arafat:Ahmed123@cluster0.it4s83q.mongodb.net/?retryWr
 > `DB_DATABASE` will be name of DB in Compass, in this case it is `test_laravel`
 
 
+- Set the default database connection name in `config\database.php`:
+
+````php
+   /*
+    |--------------------------------------------------------------------------
+| Default Database Connection Name
+    |--------------------------------------------------------------------------
+|
+| Here you may specify which of the database connections below you wish
+| to use as your default connection for all database work. Of course
+| you may use many connections at once using the Database library.
+|
+    */
+
+'default' => env('DB_CONNECTION', 'mongodb'),
+````
+
 - Each model must extend from `\MongoDB\Laravel\Eloquent\Model` class, like this:
 ````php
 <?php
@@ -55,10 +72,13 @@ class Book extends \MongoDB\Laravel\Eloquent\Model
 {
     use HasFactory;
     protected $fillable = ['title'];
-    protected $collection = 'name'; // table nam
+    protected $collection = 'name'; // table name
 }
 ````
 
+> Note that when storing new data, Laravel will automatically create the collection in the MongoDB database for you. By
+> default, the collection name is the plural of the model used (“posts” in this case). However, you can override that by
+> setting a collection property on the model like this `protected $collection = 'blog_posts';`
 
 - To add new document
 ````php
