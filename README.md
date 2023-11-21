@@ -12,7 +12,8 @@
 > Request - Validation - Rules - CSRF Protection - Cache - Cookies -
 > Sessions - Response - File Uploading - Hashing - Image Intervention
 > Collections - Rate Limiter - Resources (Transformers) - Events & Listener - Facade Design Pattern - Schedule - Custom Commands -
-> Laravel Passport - Laravel Sanctum - MongoDB With Laravel - Localization - Gates & Policies - Roles & Permissions - CORS - HATEOAS
+> Laravel Passport - Laravel Sanctum - MongoDB With Laravel - Localization - Gates & Policies - Roles & Permissions - CORS - HATEOAS -
+> Fawry E-Wallet
 
 > To Be Added : Ajax With Laravel - Broadcast - Websocket - Form Class
 
