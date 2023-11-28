@@ -13,7 +13,7 @@
 > Sessions - Response - File Uploading - Hashing - Image Intervention
 > Collections - Rate Limiter - Resources (Transformers) - Events & Listener - Facade Design Pattern - Schedule - Custom Commands -
 > Laravel Passport - Laravel Sanctum - MongoDB With Laravel - Localization - Gates & Policies - Roles & Permissions - CORS - HATEOAS -
-> Fawry E-Wallet
+> Fawry E-Wallet - Model Observer - Queues
 
 > To Be Added : Ajax With Laravel - Broadcast - Websocket - Form Class
 
