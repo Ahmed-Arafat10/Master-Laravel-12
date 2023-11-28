@@ -7,7 +7,7 @@
 
 > MVC - Model - View - Controller - Migration - Artisan - Middleware -
 > Eloquent ORM - Relationships - Facade - Routes - Blade Template Engine - Components - Authorization -
-> Authorization - Laravel Breeze - Query Builder - Factory - Seeder - Tinker - APIs -
+> Authentication - Laravel Breeze - Query Builder - Factory - Seeder - Tinker - APIs -
 > Email Sending - Config - Service Providers - Namespace - Enum - Traits - Response -
 > Request - Validation - Rules - CSRF Protection - Cache - Cookies -
 > Sessions - Response - File Uploading - Hashing - Image Intervention
