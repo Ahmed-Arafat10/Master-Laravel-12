@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "d1196748-0fcc-4f40-9848-89dc210c9908",
+		"name": "Grand_Fawry_Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29978609"
+	},
+	"item": [
+		{
+			"name": "issue token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "customerProfileId",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "customerMobile",
+							"value": "01013769931",
+							"type": "text"
+						},
+						{
+							"key": "customerEmail",
+							"value": "ahmedxarafat0101@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "cardNumber",
+							"value": "4032031609921936",
+							"type": "text"
+						},
+						{
+							"key": "cardAlias",
+							"value": "ARAFAT",
+							"type": "text"
+						},
+						{
+							"key": "expiryYear",
+							"value": "24",
+							"type": "text"
+						},
+						{
+							"key": "expiryMonth",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "cvv",
+							"value": "613",
+							"type": "text"
+						},
+						{
+							"key": "isDefault",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8002/api/fawry/issue-token",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8002",
+					"path": [
+						"api",
+						"fawry",
+						"issue-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay with card",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "card_token_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "cvv",
+							"value": "613",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "100.00",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8002/api/fawry/pay-with-card",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8002",
+					"path": [
+						"api",
+						"fawry",
+						"pay-with-card"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get card",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8002/api/fawry/get-customer-tokens?user_id=123",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8002",
+					"path": [
+						"api",
+						"fawry",
+						"get-customer-tokens"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
