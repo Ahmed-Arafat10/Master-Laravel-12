@@ -61,4 +61,5 @@ class GoogleController extends Controller
 }
 ````
 
-> Doc : https://laravel.com/docs/10.x/socialite
+> Doc : https://laravel.com/docs/10.x/socialite <br>
+> Article : https://codyrigg.medium.com/how-to-add-a-google-login-using-socialite-on-laravel-8-with-jetstream-6153581e7dc9
