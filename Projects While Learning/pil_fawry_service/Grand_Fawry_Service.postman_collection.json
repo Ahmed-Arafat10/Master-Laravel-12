@@ -9,49 +9,39 @@
 		{
 			"name": "issue token",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "5|PzWFa9r9vuOIVYKoZDuSdrcLVXzFiOxVZrF70h5o2a401eb1",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "customerProfileId",
-							"value": "5",
-							"type": "text"
-						},
-						{
-							"key": "customerMobile",
-							"value": "01013769931",
-							"type": "text"
-						},
-						{
-							"key": "customerEmail",
-							"value": "ahmedxarafat0101@gmail.com",
-							"type": "text"
-						},
-						{
 							"key": "cardNumber",
-							"value": "4032031609921936",
-							"type": "text"
-						},
-						{
-							"key": "cardAlias",
-							"value": "ARAFAT",
+							"value": "4032033398109715",
 							"type": "text"
 						},
 						{
 							"key": "expiryYear",
-							"value": "24",
+							"value": "28",
 							"type": "text"
 						},
 						{
 							"key": "expiryMonth",
-							"value": "10",
+							"value": "8",
 							"type": "text"
 						},
 						{
 							"key": "cvv",
-							"value": "613",
+							"value": "099",
 							"type": "text"
 						},
 						{
@@ -62,18 +52,14 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8002/api/fawry/issue-token",
-					"protocol": "http",
+					"raw": "{{URL}}/api/fawry/card/issue-token",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{URL}}"
 					],
-					"port": "8002",
 					"path": [
 						"api",
 						"fawry",
+						"card",
 						"issue-token"
 					]
 				}
@@ -83,24 +69,29 @@
 		{
 			"name": "pay with card",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "5|PzWFa9r9vuOIVYKoZDuSdrcLVXzFiOxVZrF70h5o2a401eb1",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "user_id",
-							"value": "5",
-							"type": "text"
-						},
-						{
-							"key": "card_token_id",
-							"value": "3",
+							"key": "card_token",
+							"value": "ca01261bdcd340d76c95fe586bf28aac4200d284b6e7cbbd2f67526ff1b13750",
 							"type": "text"
 						},
 						{
 							"key": "cvv",
-							"value": "613",
+							"value": "099",
 							"type": "text"
 						},
 						{
@@ -111,18 +102,14 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8002/api/fawry/pay-with-card",
-					"protocol": "http",
+					"raw": "{{URL}}/api/fawry/card/pay-with-card",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{URL}}"
 					],
-					"port": "8002",
 					"path": [
 						"api",
 						"fawry",
+						"card",
 						"pay-with-card"
 					]
 				}
@@ -135,6 +122,16 @@
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "5|PzWFa9r9vuOIVYKoZDuSdrcLVXzFiOxVZrF70h5o2a401eb1",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -148,29 +145,194 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8002/api/fawry/get-customer-tokens?user_id=123",
-					"protocol": "http",
+					"raw": "{{URL}}/api/fawry/card/get-customer-tokens",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{URL}}"
 					],
-					"port": "8002",
 					"path": [
 						"api",
 						"fawry",
+						"card",
 						"get-customer-tokens"
-					],
-					"query": [
-						{
-							"key": "user_id",
-							"value": "123"
-						}
 					]
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "sign in",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "arafat@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/api/user/signin",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "arafat",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "arafat@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "01013769931",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/api/user/signup",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay R2F",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/fawry/ewallet/pay-r2f",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"fawry",
+						"ewallet",
+						"pay-r2f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay QR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/fawry/ewallet/pay-qr",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"fawry",
+						"ewallet",
+						"pay-qr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/fawry/ewallet/transactions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"fawry",
+						"ewallet",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "5|PzWFa9r9vuOIVYKoZDuSdrcLVXzFiOxVZrF70h5o2a401eb1",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
 		}
 	]
 }
