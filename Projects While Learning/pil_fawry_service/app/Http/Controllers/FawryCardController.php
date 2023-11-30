@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FawryCardIssueTokenRequest;
+use App\Http\Requests\FawryCardPayRequest;
 use App\Models\Transaction;
 use App\Models\UserCardToken;
 use Illuminate\Http\Request;
@@ -11,7 +13,7 @@ use Illuminate\Support\Str;
 
 class FawryCardController extends FawryController
 {
-    public function issueToken(Request $request)
+    public function issueToken(FawryCardIssueTokenRequest $request)
     {
         //dd($request->all());
         $data = [
@@ -53,7 +55,7 @@ class FawryCardController extends FawryController
         ], 201);
     }
 
-    public function payWithCardToken(Request $request)
+    public function payWithCardToken(FawryCardPayRequest $request)
     {
         $user = Auth::user();
         if(!UserCardToken::where('card_token',$request->card_token)->exists())
@@ -130,7 +132,7 @@ class FawryCardController extends FawryController
             'code' => $apiResponse['statusCode']
         ], 400);
         $transaction = Transaction::create([
-            'user_id' => 5,
+            'user_id' => Auth::id(),
             'ref_num' => $apiResponse['referenceNumber'],
             'merchant_ref_num' => $apiResponse['merchantRefNumber'],
             'order_amount' => $apiResponse['orderAmount'],
@@ -150,7 +152,7 @@ class FawryCardController extends FawryController
         ], 201);
     }
 
-    public function getCard(Request $request)
+    public function getCard()
     {
         $merchantCode = $this->merchantCode;
         $merchant_cust_prof_id = Auth::id();
