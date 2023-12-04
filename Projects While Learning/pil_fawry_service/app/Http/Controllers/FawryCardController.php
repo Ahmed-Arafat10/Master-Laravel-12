@@ -41,7 +41,6 @@ class FawryCardController extends FawryController
             'message' => $apiResponse['statusDescription'],
             'code' => $apiResponse['statusCode']
         ], 404);
-        dd($apiResponse);
         $userToken = UserCardToken::create([
             'user_id' => Auth::id(),
             'card_token' => $apiResponse['card']['token'],
@@ -111,6 +110,7 @@ class FawryCardController extends FawryController
             'Content-Type' => 'application/json',
         ])->post('https://www.atfawry.com/ECommerceWeb/Fawry/payments/charge', $data);
         // https://atfawry.fawrystaging.com/ECommerceWeb/Fawry/payments/charge
+
         $apiResponse = $response->json();
         if ($apiResponse['statusCode'] != 200) return response()->json([
             'status' => false,
@@ -125,7 +125,6 @@ class FawryCardController extends FawryController
             'code' => 200
         ]);
     }
-
     public function callback()
     {
         $apiResponse = \request()->all();

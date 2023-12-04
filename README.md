@@ -6,14 +6,14 @@
 ### Topics Discussed:
 
 > MVC - Model - View - Controller - Migration - Artisan - Middleware -
-> Eloquent ORM - Relationships - Facade - Routes - Blade Template Engine - Authorization -
-> Authorization - Laravel Breeze - Query Builder - Factory - Seeder - Tinker - APIs -
+> Eloquent ORM - Relationships - Facade - Routes - Blade Template Engine - Components - Authorization -
+> Authentication - Laravel Breeze - Query Builder - Factory - Seeder - Tinker - APIs -
 > Email Sending - Config - Service Providers - Namespace - Enum - Traits - Response -
 > Request - Validation - Rules - CSRF Protection - Cache - Cookies -
-> Sessions - Response - File Uploading - Hashing - Image Intervention
-> Collections - Rate Limiter - Resources (Transformers) - Events & Listener - Facade Design Pattern - Schedule - Custom Commands -
-> Laravel Passport - Laravel Sanctum - MongoDB With Laravel - Localization - Gates & Policies - Roles & Permissions - CORS - HATEOAS -
-> Fawry E-Wallet
+> Sessions - File Uploading - Hashing - Image Intervention
+> Collections - Rate Limiter - Resources (Transformers) - Events - Listener - Facade Design Pattern - Schedule - Custom Commands -
+> Laravel Passport - Laravel Sanctum - MongoDB With Laravel - Localization - Gates - Policies - Roles & Permissions - CORS - HATEOAS -
+> Fawry E-Wallet - Model Observer - Queues - Laravel Socialite
 
 > To Be Added : Ajax With Laravel - Broadcast - Websocket - Form Class
 
