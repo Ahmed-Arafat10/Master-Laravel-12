@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "d1196748-0fcc-4f40-9848-89dc210c9908",
+		"name": "Grand_Fawry_Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29978609"
+	},
+	"item": [
+		{
+			"name": "issue token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "5|PzWFa9r9vuOIVYKoZDuSdrcLVXzFiOxVZrF70h5o2a401eb1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "cardNumber",
+							"value": "4032033398109715",
+							"type": "text"
+						},
+						{
+							"key": "expiryYear",
+							"value": "28",
+							"type": "text"
+						},
+						{
+							"key": "expiryMonth",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "cvv",
+							"value": "099",
+							"type": "text"
+						},
+						{
+							"key": "isDefault",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/api/fawry/card/issue-token",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"fawry",
+						"card",
+						"issue-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay with card",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "5|PzWFa9r9vuOIVYKoZDuSdrcLVXzFiOxVZrF70h5o2a401eb1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "card_token",
+							"value": "ca01261bdcd340d76c95fe586bf28aac4200d284b6e7cbbd2f67526ff1b13750",
+							"type": "text"
+						},
+						{
+							"key": "cvv",
+							"value": "099",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "100.00",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/api/fawry/card/pay-with-card",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"fawry",
+						"card",
+						"pay-with-card"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get card",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "5|PzWFa9r9vuOIVYKoZDuSdrcLVXzFiOxVZrF70h5o2a401eb1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/api/fawry/card/get-customer-tokens",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"fawry",
+						"card",
+						"get-customer-tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign in",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "arafat@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/api/user/signin",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "arafat",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "arafat@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "01013769931",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/api/user/signup",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay R2F",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/fawry/ewallet/pay-r2f",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"fawry",
+						"ewallet",
+						"pay-r2f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay QR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/fawry/ewallet/pay-qr",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"fawry",
+						"ewallet",
+						"pay-qr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/fawry/ewallet/transactions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"fawry",
+						"ewallet",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "5|PzWFa9r9vuOIVYKoZDuSdrcLVXzFiOxVZrF70h5o2a401eb1",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		}
+	]
+}
