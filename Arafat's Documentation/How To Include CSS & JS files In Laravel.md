@@ -33,6 +33,8 @@ npm run dev
 ````
 vite build
 ````
+> to install `vite`: `npm install --save-dev vite laravel-vite-plugin`
+
 
 > this will add `build/assets/` folder into your `public`
 
