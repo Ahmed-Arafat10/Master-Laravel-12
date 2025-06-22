@@ -1,24 +1,98 @@
-### Master Laravel 10 PHP Framework
+### Master Laravel 12 PHP Framework
 
-- This GitHub Repo will help you learn and master Laravel 10
-  Framework.
+- This GitHub Repo will help you learn and master Laravel 12 Framework.
 
 ### Topics Discussed:
 
-> MVC - Model - View - Controller - Migration - Artisan - Middleware -
-> Eloquent ORM - Relationships - Facade - Routes - Blade Template Engine - Components - Authorization -
-> Authentication - Laravel Breeze - Query Builder - Factory - Seeder - Tinker - APIs -
-> Email Sending - Config - Service Providers - Namespace - Enum - Traits - Response -
-> Request - Validation - Rules - CSRF Protection - Cache - Cookies -
-> Sessions - File Uploading - Hashing - Image Intervention
-> Collections - Rate Limiter - Resources (Transformers) - Events - Listener - Facade Design Pattern - Schedule - Custom Commands -
-> Laravel Passport - Laravel Sanctum - MongoDB With Laravel - Localization - Gates - Policies - Roles & Permissions - CORS - HATEOAS -
-> Fawry E-Wallet - Model Observer - Queues - Laravel Socialite
+#### Core Concepts
+
+* MVC
+* Model
+* View
+* Controller
+* Routes
+* Middleware
+* Service Providers
+* Namespace
+
+#### Tooling & Utilities
+
+* Artisan
+* Custom Commands
+* Tinker
+* Config
+* Schedule
+* Enum
+* Traits
+
+#### Database & ORM
+
+* Migration
+* Seeder
+* Factory
+* Query Builder
+* Eloquent ORM
+* Relationships
+* Model Observer
+* MongoDB With Laravel
+
+#### Authentication & Authorization
+
+* Authentication
+* Authorization
+* Laravel Breeze
+* Laravel Passport
+* Laravel Sanctum
+* Gates
+* Policies
+* Roles & Permissions
+
+#### API & Security
+
+* APIs
+* CORS
+* HATEOAS
+* CSRF Protection
+* Request
+* Response
+* Validation
+* Rules
+
+#### Frontend & Views
+
+* Blade Template Engine
+* Components
+* Resources (Transformers)
+* Localization
+
+#### Sessions, Storage, & Caching
+
+* Sessions
+* Cookies
+* Cache
+* File Uploading
+* Image Intervention
+* Hashing
+
+#### Advanced Features
+
+* Events
+* Listener
+* Facades
+* Facade Design Pattern
+* Rate Limiter
+* Email Sending
+* Collections
+
+
+### Others
+- Fawry Integration
+
 
 > To Be Added : Ajax With Laravel - Broadcast - Websocket - Form Class
 
 
-- Packages 
+- Packages Used
   - `"darryldecode/cart": "^4.2"`
   - `"haruncpi/laravel-id-generator": "^1.1"`
   - `"intervention/image": "^2.7"`
