@@ -84,6 +84,10 @@
 * Email Sending
 * Collections
 
+#### Laravel Testing
+
+* Pint
+
 
 ### Others
 - Fawry Integration
