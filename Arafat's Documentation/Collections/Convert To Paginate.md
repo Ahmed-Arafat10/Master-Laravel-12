@@ -5,7 +5,7 @@
         $page = LengthAwarePaginator::resolveCurrentPage();
         $perPage = 15;
         $result = $collection->slice(($page - 1) * $perPage, $perPage)->values();
-        $paginated = new LengthAwareP\aginator($result, $collection->count(), $perPage, $page, [
+        $paginated = new LengthAwarePaginator($result, $collection->count(), $perPage, $page, [
             'path' =>url()->current()
         ]);
         //$paginated->appends(request()->all());
