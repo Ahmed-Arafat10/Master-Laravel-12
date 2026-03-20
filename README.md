@@ -82,7 +82,6 @@ A comprehensive, structured, and in-depth documentation repository covering core
 - [Key Features](#key-features)
 - [How to Use](#how-to-use)
 - [Target Audience](#target-audience)
-- [License](#license)
 
 ---
 
@@ -483,10 +482,6 @@ The documentation is divided into multiple sections, each focusing on a specific
 * Developers preparing for interviews
 
 ---
-
-## License
-
-MIT License
 
 - Packages Used
   - `"darryldecode/cart": "^4.2"`
