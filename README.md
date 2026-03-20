@@ -1,4 +1,9 @@
-### Master Laravel 12 PHP Framework
+<div align="center">
+  <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel Logo" width="120">
+
+<h1>Master Laravel 12 Framework</h1>
+
+</div>
 
 - This GitHub Repo will help you learn and master Laravel 12 Framework.
 
